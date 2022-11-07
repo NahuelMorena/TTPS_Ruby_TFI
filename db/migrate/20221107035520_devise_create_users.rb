@@ -17,7 +17,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       ## Personal data
       t.string :name, null: false
       t.string :surname, null: false
-      t.integer :role, default: 0, null: false
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
