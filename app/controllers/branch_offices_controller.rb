@@ -10,9 +10,7 @@ class BranchOfficesController < ApplicationController
     end
 
     def create 
-        @branch_office = BranchOffice.create(name: params[:branch_office][:name], 
-                                            direction: params[:branch_office][:direction],
-                                            phone: params[:branch_office][:phone])
+        @branch_office = BranchOffice.create(branch_office_params)
         render json: @branch_office
     end
 
@@ -23,9 +21,7 @@ class BranchOfficesController < ApplicationController
     end
 
     def update
-        @branch_office.update(name: params[:branch_office][:name], 
-                              direction: params[:branch_office][:direction],
-                              phone: params[:branch_office][:phone])
+        @branch_office.update(branch_office_params)
         redirect_to @branch_office  
     end
 
@@ -36,5 +32,9 @@ class BranchOfficesController < ApplicationController
 
     def find_branch_office
         @branch_office = BranchOffice.find(params[:id])
+    end
+
+    def branch_office_params
+        params.require(:branch_office).permit(:name,:direction,:phone)
     end
 end

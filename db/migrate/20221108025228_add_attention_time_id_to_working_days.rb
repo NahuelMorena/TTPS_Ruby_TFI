@@ -1,0 +1,5 @@
+class AddAttentionTimeIdToWorkingDays < ActiveRecord::Migration[7.0]
+  def change
+    add_reference :working_days, :attention_time, null: false, foreign_key: true
+  end
+end
