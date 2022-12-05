@@ -1,0 +1,18 @@
+<%= form_with(model: @branch_office, local: true) do |form| %>
+
+    <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </div>
+    <div class="field">
+        <%= form.label :direction %>
+        <%= form.text_field :direction %>
+    </div>
+    <div class="field">
+        <%= form.label :phone %>
+        <%= form.text_field :phone %>
+    </div>
+    <div class="field">
+        <%= form.submit%>
+    </div>
+<%end%>
