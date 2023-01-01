@@ -1,3 +1,3 @@
 class AttentionTime < ApplicationRecord
-    has_many :users
+    has_many :working_days
 end
