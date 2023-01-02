@@ -1,0 +1,19 @@
+<%= form_with(model: @working_day, local: true) do |form| %>
+
+    <div class="field">
+        <%= form.label :day %>
+        <% days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']%>
+        <%= form.select :day, days%>
+    </div>
+    <div class="field">
+        <%= form.label :attention_time_id %>
+        <%= form.collection_select :attention_time_id, AttentionTime.all, :id, :get_by_format, prompt: true%>
+    </div>
+    <div class="field">
+        <%= form.label :branch_office_id, "Seleccionar sucursal"%>
+        <%= form.collection_select :branch_office_id, BranchOffice.all, :id, :name%>
+    </div>
+    <div class="field">
+        <%= form.submit%>
+    </div>
+<%end%>

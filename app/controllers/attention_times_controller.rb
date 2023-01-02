@@ -25,13 +25,13 @@ class AttentionTimesController < ApplicationController
     def edit
     end
     
-    #PATCH branch_offices/{id}
+    #PATCH /branch_offices/{id}
     def update
         @attention_time.update(attention_time_params)
         redirect_to @attention_time
     end
     
-    #DELETE branch_offices/{id}
+    #DELETE /branch_offices/{id}
     def destroy
         @attention_time.destroy
         redirect_to root_path

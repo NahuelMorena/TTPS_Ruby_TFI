@@ -25,13 +25,13 @@ class BranchOfficesController < ApplicationController
     def edit
     end
 
-    #PATCH branch_offices/{id}
+    #PATCH /branch_offices/{id}
     def update
         @branch_office.update(branch_office_params)
         redirect_to @branch_office  
     end
 
-    #DELETE branch_offices/{id}
+    #DELETE /branch_offices/{id}
     def destroy
         @branch_office.destroy
         redirect_to root_path
