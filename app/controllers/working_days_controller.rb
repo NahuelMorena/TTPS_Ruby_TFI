@@ -13,8 +13,12 @@ class WorkingDaysController < ApplicationController
 
     #POST /working_days
     def create 
-        @working_day = WorkingDay.create(working_day_params)
-        redirect_to working_days_path
+        if WorkingDay.where(day: params[:working_day][:day], branch_office_id: params[:working_day][:branch_office_id]).any?
+            redirect_to new_working_day_path, alert: "El dia de trabajo para esta sucursal ya existe en el sistema"
+        else 
+            @working_day = WorkingDay.create(working_day_params)
+            redirect_to working_days_path, notice: "El dia laboral se a registado correctamente"
+        end
     end
 
     #GET /working_days/:id
@@ -27,14 +31,19 @@ class WorkingDaysController < ApplicationController
 
     #PATCH /working_days/:id
     def update
-        @working_day.update(working_day_params)
-        redirect_to working_days_path
+        id = WorkingDay.where(day: params[:working_day][:day], branch_office_id: params[:working_day][:branch_office_id]).first.id
+        if @working_day.id != id
+            redirect_to edit_working_day_path, alert: "El dia de trabajo para esta sucursal ya existe en el sistema"
+        else 
+            @working_day.update(working_day_params)
+            redirect_to working_days_path, notice: "El dia laboral se a registado correctamente"
+        end
     end
 
     #DELETE /working_day/:id
     def destroy
         @working_day.destroy
-        redirect_to root_path
+        redirect_to working_days_path, notice: "El dia laboral fue eliminado satisfactoriamente"
     end
 
     def find_working_day

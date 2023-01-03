@@ -11,8 +11,14 @@
         <%= link_to "Agregar nueva franja horaria", new_attention_time_url %>    
     </div>
     <div class="field">
-        <%= form.label :branch_office_id, "Seleccionar sucursal"%>
-        <%= form.collection_select :branch_office_id, BranchOffice.all, :id, :name%>
+        <% if @working_day.id.nil? %>
+            <%= form.label :branch_office_id, "Seleccionar sucursal"%>
+            <%= form.collection_select :branch_office_id, BranchOffice.all, :id, :name %>
+        <% else %>
+            <% branch_office = [[@working_day.branch_office.name, @working_day.branch_office_id]] %>
+            <%= form.label :branch_office_id, "Sucursal en la cual funciona el dia"%>
+            <%= form.select :branch_office_id, branch_office %>
+        <% end %>
     </div>
     <div class="field">
         <%= form.submit%>

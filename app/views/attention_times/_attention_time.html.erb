@@ -1,4 +1,7 @@
 <tr>
     <td><%= attention_time.get_by_format %></td>
-    <td> Operaciones </td> 
+    <td> 
+        <%= link_to 'Editar', edit_attention_time_path(attention_time) %>
+        <%= link_to 'Ver mas', attention_time %>
+    </td> 
 </tr>

@@ -3,17 +3,21 @@
         <h1><%=@branch_office.name%></h1>
         <h1><%=@branch_office.direction%></h1>
         <h1><%=@branch_office.phone%></h1>
-        <%= button_to 'Eliminar articulo', @branch_office , method: :delete %>
+        <div class=row>
+            <div class=col-2><%= button_to 'Eliminar Sucursal', @branch_office , method: :delete %></div>
+            <div class=col-4><%= link_to 'Editar Sucursal', edit_branch_office_path(@branch_office) %></div>     
+        </div >
     </div>
 
     <div class="row">
         <h3>Horarios de atención<h3>
-        <%= link_to "Agregar nuevo dia laboral", new_working_day_url %>
+        <%= link_to "Agregar nuevo dia laboral", new_working_day_path %>
         <div class="col-12">
             <table class="table table-primary">
                 <thead>
                     <tr class="table-info">
                         <th>Dia</th>
+                        <th>Sucursal</th>
                         <th>Franja Horaria</th>
                         <th>Operaciones</th>
                     </tr>
