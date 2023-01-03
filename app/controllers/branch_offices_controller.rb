@@ -15,9 +15,9 @@ class BranchOfficesController < ApplicationController
     def create 
         @branch_office = BranchOffice.create(branch_office_params)
         if @branch_office.invalid?
-            redirect_to new_branch_office_path, alert: "Deben completarse todos los campos"
+            redirect_to new_branch_office_path, alert: @branch_office.get_error()
         else 
-            redirect_to @branch_office 
+            redirect_to @branch_office , notice: "Sucursal creada exitosamente"
         end
     end
 
