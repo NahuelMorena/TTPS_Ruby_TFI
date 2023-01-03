@@ -2,12 +2,13 @@
 
     <div class="field">
         <%= form.label :day %>
-        <% days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']%>
+        <% days = [['Lunes', 1], ['Martes', 2], ['Miercoles', 3], ['Jueves', 4], ['Viernes', 5], ['Sabado', 6], ['Domingo', 7]]%>
         <%= form.select :day, days%>
     </div>
     <div class="field">
         <%= form.label :attention_time_id %>
         <%= form.collection_select :attention_time_id, AttentionTime.all, :id, :get_by_format, prompt: true%>
+        <%= link_to "Agregar nueva franja horaria", new_attention_time_url %>    
     </div>
     <div class="field">
         <%= form.label :branch_office_id, "Seleccionar sucursal"%>

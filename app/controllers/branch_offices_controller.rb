@@ -17,21 +17,21 @@ class BranchOfficesController < ApplicationController
         redirect_to @branch_office 
     end
 
-    #GET /branch_offices/{id}
+    #GET /branch_offices/:id
     def show
     end
 
-    #GET /branch_offices/{id}/edit
+    #GET /branch_offices/:id/edit
     def edit
     end
 
-    #PATCH /branch_offices/{id}
+    #PATCH /branch_offices/:id
     def update
         @branch_office.update(branch_office_params)
         redirect_to @branch_office  
     end
 
-    #DELETE /branch_offices/{id}
+    #DELETE /branch_offices/:id
     def destroy
         @branch_office.destroy
         redirect_to root_path

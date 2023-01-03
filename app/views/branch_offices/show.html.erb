@@ -1,7 +1,27 @@
-<h1><%=@branch_office.name%></h1>
-<h1><%=@branch_office.direction%></h1>
-<h1><%=@branch_office.phone%></h1>
+<div class="container">
+    <div class="row">
+        <h1><%=@branch_office.name%></h1>
+        <h1><%=@branch_office.direction%></h1>
+        <h1><%=@branch_office.phone%></h1>
+        <%= button_to 'Eliminar articulo', @branch_office , method: :delete %>
+    </div>
 
-<div>
-    <%= button_to 'Eliminar articulo', @branch_office , method: :delete %>
+    <div class="row">
+        <h3>Horarios de atención<h3>
+        <%= link_to "Agregar nuevo dia laboral", new_working_day_url %>
+        <div class="col-12">
+            <table class="table table-primary">
+                <thead>
+                    <tr class="table-info">
+                        <th>Dia</th>
+                        <th>Franja Horaria</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h4><%= render @branch_office.working_days.sort_by(&:day) %></h4>
+                </tbody>
+            </table>
+        </div>    
+    </div>
 </div>

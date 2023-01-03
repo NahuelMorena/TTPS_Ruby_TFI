@@ -1,5 +1,21 @@
-<div class="large-container center-block">
-    <h1>Dias con horarios cargados en el sistema</h1>
-
-    <%= render @working_days %>
+<div class="container">
+    <div class="row">
+        <h3>Dias de trabajo cargados en el sistema<h3>
+        <%= link_to "Agregar nuevo dia laboral", new_working_day_path%>
+        <div class="col">
+            <table class="table table-primary">
+                <thead>
+                    <tr class="table-info">
+                        <th>Dia</th>
+                        <th>Sucursal</th>
+                        <th>Franja Horaria</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h4><%= render @working_days.sort_by(&:day) %></h4> 
+                </tbody>
+            </table>
+        </div>    
+    </div>
 </div>

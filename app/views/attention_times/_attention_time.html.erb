@@ -1,6 +1,4 @@
-<div class="card padding margin-top">
-    <h3 class="text-uppercase"><%= attention_time.id%></h3>
-    <p class="text-secondary"><%= attention_time.hour_start%></p>
-    <p class="text-secondary"><%= attention_time.hour_end%></p>
-    <%= link_to "Ver más", attention_time%>
-</div>
+<tr>
+    <td><%= attention_time.get_by_format %></td>
+    <td> Operaciones </td> 
+</tr>

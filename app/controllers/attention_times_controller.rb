@@ -17,21 +17,21 @@ class AttentionTimesController < ApplicationController
         redirect_to attention_times_path
     end
 
-    #GET /attention_times/{id}
+    #GET /attention_times/:id
     def show
     end
 
-    #GET /attention_times/{id}/edit
+    #GET /attention_times/:id/edit
     def edit
     end
     
-    #PATCH /branch_offices/{id}
+    #PATCH /branch_offices/:id
     def update
         @attention_time.update(attention_time_params)
-        redirect_to @attention_time
+        redirect_to attention_times_path
     end
     
-    #DELETE /branch_offices/{id}
+    #DELETE /branch_offices/:id
     def destroy
         @attention_time.destroy
         redirect_to root_path
