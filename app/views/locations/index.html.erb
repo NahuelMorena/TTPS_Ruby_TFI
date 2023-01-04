@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <h3>Localizaciones cargadas en el sistema<h3>
+        <%= link_to "Agregar nueva localización", new_location_path%>
+        <div class="col">
+            <table class="table table-primary">
+                <thead>
+                    <tr class="table-info">
+                        <th>Provincia</th>
+                        <th>Localidad</th>
+                        <th>Sucursales registradas</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h4><%= render @locations %></h4> 
+                </tbody>
+            </table>
+        </div>    
+    </div>
+</div>

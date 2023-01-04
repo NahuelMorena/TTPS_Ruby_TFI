@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_08_025228) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_04_020137) do
   create_table "attention_times", force: :cascade do |t|
     t.time "hour_start", null: false
     t.time "hour_end", null: false
@@ -22,6 +22,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_025228) do
     t.string "name", null: false
     t.string "direction", null: false
     t.string "phone", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "location_id", null: false
+    t.index ["location_id"], name: "index_branch_offices_on_location_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "province_id", null: false
+    t.index ["province_id"], name: "index_locations_on_province_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -60,6 +76,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_025228) do
     t.index ["branch_office_id"], name: "index_working_days_on_branch_office_id"
   end
 
+  add_foreign_key "branch_offices", "locations"
+  add_foreign_key "locations", "provinces"
   add_foreign_key "users", "roles"
   add_foreign_key "working_days", "attention_times"
   add_foreign_key "working_days", "branch_offices"

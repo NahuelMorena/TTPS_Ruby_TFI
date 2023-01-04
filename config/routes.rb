@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :provinces
   devise_for :users
   # get 'home/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -23,4 +24,7 @@ Rails.application.routes.draw do
 
   #Working_days routes
   resources :working_days
+
+  #Locations routes
+  resources :locations
 end

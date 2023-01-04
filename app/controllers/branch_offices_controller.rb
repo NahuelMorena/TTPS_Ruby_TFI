@@ -2,7 +2,7 @@ class BranchOfficesController < ApplicationController
     before_action :find_branch_office, except: [:new, :create, :index]
     
     #GET /branch_offices
-    def index
+    def index 
         @branch_offices = BranchOffice.all
     end
     
@@ -45,15 +45,16 @@ class BranchOfficesController < ApplicationController
         end 
     end
 
-    def find_branch_office
-        @branch_office = BranchOffice.find(params[:id])
-    end
+    private 
+        def find_branch_office
+            @branch_office = BranchOffice.find(params[:id])
+        end
 
-    def branch_office_params
-        params.require(:branch_office).permit(:name,:direction,:phone)
-    end
+        def branch_office_params
+            params.require(:branch_office).permit(:name,:direction,:phone)
+        end
 
-    def validate_params()
-        #valida que los datos ingresados sean validos
-    end
+        def validate_params()
+            #valida que los datos ingresados sean validos
+        end
 end
