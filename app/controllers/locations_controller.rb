@@ -13,11 +13,11 @@ class LocationsController < ApplicationController
 
     #POST /locations 
     def create
-      @location = Location.create(location_params)
-      if @location.invalid?
-        redirect_to new_location_path, alert: @location.full_messages.first
+      if Location.where(name: params[:location][:name], province_id: params[:location][:province_id]).any?
+        redirect_to new_location_path, alert: "La combinación de nombre de localidad y provincia ya se encuentra en el sistema"
       else
-        redirect_to @location , notice: "Localización creada exitosamente"
+        @location = Location.create(location_params)
+        redirect_to @location, notice: "Localización creada exitosamente"
       end
     end
 
@@ -31,8 +31,8 @@ class LocationsController < ApplicationController
     
     #PATCH /locations/:id
     def update
-      if Location.where(name: params[:location][:name]).any?
-        redirect_to edit_location_path, alert: "El nombre ingresado ya se encuentra en el sistema"
+      if Location.where(name: params[:location][:name], province_id: params[:location][:province_id]).any?
+        redirect_to edit_location_path, alert: "La combinación de nombre de localidad y provincia ya se encuentra en el sistema"
       else
         @location.update(location_params)
         redirect_to locations_path , notice: "Localidad actualizada exitosamente"
