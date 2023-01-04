@@ -1,9 +1,9 @@
-<h1>New province</h1>
-
-<%= render "form", province: @province %>
-
-<br>
-
-<div>
-  <%= link_to "Back to provinces", provinces_path %>
+<div class="small-container center-block">
+  <h3>Alta de nueva provincia</h3>
+  <%= render "provinces/form"%>
+</div>
+<div class="padding">
+  <div class="row">
+    <%= link_to "Back to provinces", provinces_path %>
+  </div>
 </div>

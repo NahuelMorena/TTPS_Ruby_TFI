@@ -31,8 +31,12 @@ class BranchOfficesController < ApplicationController
 
     #PATCH /branch_offices/:id
     def update
-        @branch_office.update(branch_office_params)
-        redirect_to @branch_office  
+        if BranchOffice.where(name: params[:branch_office][:name]).any?
+            redirect_to edit_branch_office_path, alert: "El nombre ingresado ya se encuentra en el sistema"
+        else
+            @branch_office.update(branch_office_params)
+            redirect_to @branch_office , notice: "Sucursal actualizada exitosamente"
+        end
     end
 
     #DELETE /branch_offices/:id
@@ -51,7 +55,7 @@ class BranchOfficesController < ApplicationController
         end
 
         def branch_office_params
-            params.require(:branch_office).permit(:name,:direction,:phone)
+            params.require(:branch_office).permit(:name,:direction,:phone,:location_id)
         end
 
         def validate_params()

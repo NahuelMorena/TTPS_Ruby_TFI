@@ -14,7 +14,11 @@ class LocationsController < ApplicationController
     #POST /locations 
     def create
       @location = Location.create(location_params)
-      redirect_to @location , notice: "Localidad creada exitosamente"
+      if @location.invalid?
+        redirect_to new_location_path, alert: @location.full_messages.first
+      else
+        redirect_to @location , notice: "Localización creada exitosamente"
+      end
     end
 
     #GET /locations/:id
@@ -27,14 +31,22 @@ class LocationsController < ApplicationController
     
     #PATCH /locations/:id
     def update
-      @location.update(location_params)
-      redirect_to @location
+      if Location.where(name: params[:location][:name]).any?
+        redirect_to edit_location_path, alert: "El nombre ingresado ya se encuentra en el sistema"
+      else
+        @location.update(location_params)
+        redirect_to locations_path , notice: "Localidad actualizada exitosamente"
+      end
     end
 
     #DELETE /locations/:id
     def destroy
-      @location.destroy
-      redirect_to locations_path
+      unless @location.branch_offices.empty?
+        redirect_to @location, alert: "No se puede eliminar una localidad con sucursales en el sistema"
+      else 
+        @location.destroy
+        redirect_to locations_path, notice: "Localidad eliminada satisfactoriamente"
+      end
     end
 
     private

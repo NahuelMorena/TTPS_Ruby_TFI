@@ -6,6 +6,7 @@
   <div class="field">
     <%= form.label :province_id %>
     <%= form.collection_select :province_id, Province.all, :id, :name %>
+    <%= link_to "Agregar nueva provincia", new_province_url %>  
   </div>
   <div class="padding">
     <div class="row">
