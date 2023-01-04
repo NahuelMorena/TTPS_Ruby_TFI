@@ -1,0 +1,26 @@
+<%= form_with(model: @working_day, local: true) do |form| %>
+
+    <div class="field">
+        <%= form.label :day %>
+        <% days = [['Lunes', 1], ['Martes', 2], ['Miercoles', 3], ['Jueves', 4], ['Viernes', 5], ['Sabado', 6], ['Domingo', 7]]%>
+        <%= form.select :day, days%>
+    </div>
+    <div class="field">
+        <%= form.label :attention_time_id %>
+        <%= form.collection_select :attention_time_id, AttentionTime.all, :id, :get_by_format, prompt: true%>
+        <%= link_to "Agregar nueva franja horaria", new_attention_time_url %>    
+    </div>
+    <div class="field">
+        <% if @working_day.id.nil? %>
+            <%= form.label :branch_office_id, "Seleccionar sucursal"%>
+            <%= form.collection_select :branch_office_id, BranchOffice.all, :id, :name %>
+        <% else %>
+            <% branch_office = [[@working_day.branch_office.name, @working_day.branch_office_id]] %>
+            <%= form.label :branch_office_id, "Sucursal en la cual funciona el dia"%>
+            <%= form.select :branch_office_id, branch_office %>
+        <% end %>
+    </div>
+    <div class="field">
+        <%= form.submit%>
+    </div>
+<%end%>

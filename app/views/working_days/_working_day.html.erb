@@ -1,0 +1,9 @@
+<tr>
+    <td><%= working_day.get_day_name(working_day.day)%></td>
+    <td><%= working_day.branch_office.name  %></td>
+    <td><%= working_day.attention_time.get_by_format %></td> 
+    <td>
+        <%= link_to 'Editar', edit_working_day_path(working_day) %>
+        <%= link_to 'Ver mas', working_day %>
+    </td>
+</tr>

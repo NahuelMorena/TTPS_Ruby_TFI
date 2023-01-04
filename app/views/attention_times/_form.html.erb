@@ -1,0 +1,14 @@
+<%= form_with(model: @attention_time, local: true) do |form| %>
+
+    <div class="field">
+        <%= form.label :hour_start, "Hora inicial" %>
+        <%= form.time_field :hour_start %>
+    </div>
+    <div class="field">
+        <%= form.label :hour_end, "Hora final" %>
+        <%= form.time_field :hour_end%>
+    </div>
+    <div class="field">
+        <%= form.submit%>
+    </div>
+<%end%>
