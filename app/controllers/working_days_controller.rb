@@ -46,11 +46,12 @@ class WorkingDaysController < ApplicationController
         redirect_to working_days_path, notice: "El dia laboral fue eliminado satisfactoriamente"
     end
 
-    def find_working_day
+    private 
+      def find_working_day
         @working_day = WorkingDay.find(params[:id])
-    end
+      end
 
-    def working_day_params
+      def working_day_params
         params.require(:working_day).permit(:day,:attention_time_id,:branch_office_id)
-    end
+      end
 end

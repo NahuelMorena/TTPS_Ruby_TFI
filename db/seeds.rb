@@ -8,9 +8,14 @@
 
 
 # Roles
-Role.create(name: 'Administrador')
-Role.create(name: 'Personal bancario')
-Role.create(name: 'Cliente')
+admin = Role.create(name: 'Administrador')
+personal = Role.create(name: 'Personal bancario')
+client = Role.create(name: 'Cliente')
+
+# Usuarios
+User.create(email: 'admin@gmail.com', name: 'Juan', surname: 'Hernandez', password: 'administrador', password_confirmation: 'administrador', role_id: admin.id)
+User.create(email: 'personal@gmail.com', name: 'Sofia', surname: 'Cruz', password: 'personal', password_confirmation: 'personal' , role_id: personal.id)
+User.create(email: 'cliente@gmail.com', name: 'Jose', surname: 'Peralta', password: 'cliente', password_confirmation: 'cliente', role_id: client.id)
 
 # Provincias
 Province.create(name: 'Buenos Aires')

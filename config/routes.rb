@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
-  resources :provinces
-  devise_for :users
-  # get 'home/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  
+  devise_for :users, controllers: {registrations: 'users'}
 
   # Defines the root path route ("/")
   root to: "home#index"
 
-  #Branch offices routes
+  #Branch_offices routes
   resources :branch_offices
   # Rutas que genera resources para branch_offices
 
@@ -27,4 +25,10 @@ Rails.application.routes.draw do
 
   #Locations routes
   resources :locations
+
+  #Provinces routes
+  resources :provinces
+
+  #Users routes
+  resources :users
 end

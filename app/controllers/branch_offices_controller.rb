@@ -50,15 +50,15 @@ class BranchOfficesController < ApplicationController
     end
 
     private 
-        def find_branch_office
-            @branch_office = BranchOffice.find(params[:id])
-        end
+      def find_branch_office
+        @branch_office = BranchOffice.find(params[:id])
+      end
 
-        def branch_office_params
-            params.require(:branch_office).permit(:name,:direction,:phone,:location_id)
-        end
+      def branch_office_params
+        params.require(:branch_office).permit(:name,:direction,:phone,:location_id)
+      end
 
-        def validate_params()
-            #valida que los datos ingresados sean validos
-        end
+      def validate_params()
+        #valida que los datos ingresados sean validos
+      end
 end

@@ -49,11 +49,12 @@ class AttentionTimesController < ApplicationController
         end
     end
 
-    def find_attention_time
+    private
+      def find_attention_time
         @attention_time = AttentionTime.find(params[:id])
-    end
+      end
 
-    def attention_time_params
+      def attention_time_params
         params.require(:attention_time).permit(:hour_start,:hour_end)
-    end
+      end
 end
