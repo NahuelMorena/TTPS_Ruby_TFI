@@ -48,6 +48,9 @@ gem "bootstrap"
 # Gem for authentication
 gem "devise"
 
+# Gem for authorization
+gem "cancancan"
+
 # Use Sass to process CSS
 gem "sassc-rails"
 
