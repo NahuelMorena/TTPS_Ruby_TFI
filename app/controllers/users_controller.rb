@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!
-    #load_and_authorize_resource
+    #before_action :authenticate_user!, except: %i[ show ]
+    load_and_authorize_resource
     #skip_authorize_resource only: :new
     before_action :find_user, only: %i[ show edit update destroy ]
 

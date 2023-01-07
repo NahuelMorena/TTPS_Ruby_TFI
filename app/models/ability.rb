@@ -5,6 +5,10 @@ class Ability
 
   def initialize(user)
     
+    can [:show, :edit, :update], User, User.all do |item|
+      item == user
+    end
+
     unless user.role.name == "Administrador"
       if user.role.name == "Cliente"
         puts "soy Cliente"
@@ -16,6 +20,11 @@ class Ability
       can :manage, Province
       can :manage, Location
       can :manage, BranchOffice
+
+      can :manage, AttentionTime
+      can :manage, WorkingDay
+
+      can :manage, User
     end
 
 
