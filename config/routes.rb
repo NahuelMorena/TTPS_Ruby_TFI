@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  devise_for :users, controllers: {registrations: 'users'}
+  devise_for :users
+  #devise_for :users, controllers: {registrations: 'users'}
 
   # Defines the root path route ("/")
   root to: "home#index"
@@ -30,5 +31,8 @@ Rails.application.routes.draw do
   resources :provinces
 
   #Users routes
-  resources :users
+  resources :users do 
+    get "admin/new", to: "users#new", on: :collection
+    post "admin/create", to: "users#create", on: :collection
+  end
 end

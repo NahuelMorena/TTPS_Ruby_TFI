@@ -1,4 +1,6 @@
 class AttentionTimesController < ApplicationController
+    before_action :authenticate_user!
+    load_and_authorize_resource
     before_action :find_attention_time, except: [:new, :create, :index]
 
     #GET /attention_times

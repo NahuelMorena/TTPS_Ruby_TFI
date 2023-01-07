@@ -4,6 +4,24 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    
+    unless user.role.name == "Administrador"
+      if user.role.name == "Cliente"
+        puts "soy Cliente"
+      else  
+        puts "Soy personal"
+      end
+    else
+      puts "Soy administrador"
+      can :manage, Province
+      can :manage, Location
+      can :manage, BranchOffice
+    end
+
+
+
+
+
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

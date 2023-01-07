@@ -2,9 +2,11 @@
     <h1>Administración de sucursales</h1>
     <%= link_to "Agregar nueva sucursal", new_branch_office_path%>
     <h2>Sucursales del sistema</h2>
+    <% if can? :manage, BranchOffice %>
     <div class="container">
         <div class="row">
             <%= render @branch_offices %>
         </div>
     </div>
+    <% end %>
 </div>

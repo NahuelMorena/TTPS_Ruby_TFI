@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+    before_action :authenticate_user!
+    #load_and_authorize_resource
+    #skip_authorize_resource only: :new
     before_action :find_user, only: %i[ show edit update destroy ]
 
     #GET /users
@@ -9,19 +12,14 @@ class UsersController < ApplicationController
     #GET /users/new
     def new
         @user = User.new
-        if @user
-            puts "toma el valor @user"
-        else
-            puts "No toma el valor @user"
-        end
+        @url = admin_create_users_path
     end
 
     #POST /users
     def create
-
         message = validate_params(params[:user][:email], params[:user][:password], params[:user][:password_comfirmation])
         if message
-            return redirect_to new_user_path, alert: message
+            return redirect_to admin_new_users_path , alert: message
         end
 
         @user = User.create(user_params)
@@ -38,13 +36,14 @@ class UsersController < ApplicationController
 
     #GET /users/:id/edit
     def edit
+      @url = @user
     end
 
     #PATCH /users/:id    
     def update
         message = validate_params(params[:user][:email], params[:user][:password], params[:user][:password_comfirmation])
         if message
-            return redirect_to new_user_path, alert: message
+            return redirect_to edit_user_path(@user), alert: message
         end
 
         @user.update(user_params)
@@ -63,7 +62,7 @@ class UsersController < ApplicationController
       end
 
       def user_params
-        params.require(:user).permit(:email, :name, :surname, :password, :password_comfirmation, :role_id, :branch_office_id)
+        params.require(:user).permit(:email, :name, :surname, :password, :password_confirmation, :role_id, :branch_office_id)
       end
 
       def validate_params(email, password, password_comfirmation)
