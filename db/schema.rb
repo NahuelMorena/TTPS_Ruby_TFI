@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_04_020137) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_08_190311) do
+  create_table "appointments", force: :cascade do |t|
+    t.date "date", null: false
+    t.time "hour", null: false
+    t.string "reason", null: false
+    t.string "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "branch_office_id", null: false
+    t.integer "personal_id"
+    t.index ["branch_office_id"], name: "index_appointments_on_branch_office_id"
+    t.index ["personal_id"], name: "index_appointments_on_personal_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
   create_table "attention_times", force: :cascade do |t|
     t.time "hour_start", null: false
     t.time "hour_end", null: false
@@ -48,6 +63,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_020137) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "states", force: :cascade do |t|
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,6 +97,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_020137) do
     t.index ["branch_office_id"], name: "index_working_days_on_branch_office_id"
   end
 
+  add_foreign_key "appointments", "branch_offices"
+  add_foreign_key "appointments", "users"
   add_foreign_key "branch_offices", "locations"
   add_foreign_key "locations", "provinces"
   add_foreign_key "users", "roles"
