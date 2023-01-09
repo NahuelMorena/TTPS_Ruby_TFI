@@ -1,7 +1,7 @@
 class BranchOfficesController < ApplicationController
     before_action :authenticate_user!
     load_and_authorize_resource
-    before_action :find_branch_office, except: [:new, :create, :index]
+    before_action :find_branch_office, except: [:new, :create, :index, :appointments]
     
     #GET /branch_offices
     def index 
@@ -49,6 +49,10 @@ class BranchOfficesController < ApplicationController
             @branch_office.destroy
             redirect_to branch_offices_path, notice: "Sucursal eliminada satisfactoriamente"
         end 
+    end
+
+    #GET /branch_offices/:id/appointments
+    def appointments 
     end
 
     private 

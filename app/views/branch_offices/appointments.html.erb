@@ -1,0 +1,10 @@
+<div class="large-container center-block">
+    <h1>Turnos de la sucursal <%= @branch_office.name %></h1>
+    <%= link_to "Agregar nuevo turno",  new_appointment_path %>
+    <h2>Turnos de la sucursal</h2>
+    <div class="container">
+        <div class="row">
+            <%= render @branch_office.appointments %>
+        </div>
+    </div>
+</div>

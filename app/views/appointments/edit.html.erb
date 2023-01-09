@@ -1,10 +1,7 @@
-<h1>Editing appointment</h1>
-
-<%= render "form", appointment: @appointment %>
-
-<br>
-
-<div>
-  <%= link_to "Show this appointment", @appointment %> |
-  <%= link_to "Back to appointments", appointments_path %>
+<div class="small-container center-block">
+  <h1>Editar turno</h1>
+  <%= render "appointments/form"%>
+  <div>
+    <%= link_to "Volver a las citas", appointments_path %>
+  </div>
 </div>

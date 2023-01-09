@@ -12,6 +12,11 @@ admin = Role.create(name: 'Administrador')
 personal = Role.create(name: 'Personal bancario')
 client = Role.create(name: 'Cliente')
 
+# Estados
+State.create(name: 'Pendiente')
+State.create(name: 'Atendido')
+State.create(name: 'Cancelado')
+
 # Usuarios
 User.create(email: 'admin@gmail.com', name: 'Juan', surname: 'Hernandez', password: 'administrador', password_confirmation: 'administrador', role_id: admin.id)
 User.create(email: 'personal@gmail.com', name: 'Sofia', surname: 'Cruz', password: 'personal', password_confirmation: 'personal' , role_id: personal.id)

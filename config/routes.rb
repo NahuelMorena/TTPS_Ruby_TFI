@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   #Branch_offices routes
-  resources :branch_offices
+  resources :branch_offices do
+    get "appointments", to: "branch_offices#appointments", on: :member
+  end
   # Rutas que genera resources para branch_offices
 
   # get "branch_offices", to: "branch_offices#index"

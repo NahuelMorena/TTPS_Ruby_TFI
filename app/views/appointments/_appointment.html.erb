@@ -1,22 +1,10 @@
-<div id="<%= dom_id appointment %>">
-  <p>
-    <strong>Date:</strong>
-    <%= appointment.date %>
-  </p>
-
-  <p>
-    <strong>Hour:</strong>
-    <%= appointment.hour %>
-  </p>
-
-  <p>
-    <strong>Reason:</strong>
-    <%= appointment.reason %>
-  </p>
-
-  <p>
-    <strong>Result:</strong>
-    <%= appointment.result %>
-  </p>
-
+<div class="col-6">
+  <div class="card padding margin-top">
+    <h3 class="text-uppercase"><%= appointment.branch_office.name%></h3>
+    <p class="text-secondary"><%= "Cliente: " + appointment.user.name%></p>
+    <p class="text-secondary"><%= "Fecha: " + appointment.date.to_s%></p>
+    <p class="text-secondary"><%= "Hora: " + appointment.hour.to_s%></p>
+    <p class="text-secondary"><%= "Razon: " + appointment.reason%></p>
+    <%= link_to "Ver más", appointment%>
+  </div>
 </div>

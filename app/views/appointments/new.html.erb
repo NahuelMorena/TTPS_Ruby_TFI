@@ -1,9 +1,7 @@
-<h1>New appointment</h1>
-
-<%= render "form", appointment: @appointment %>
-
-<br>
-
-<div>
-  <%= link_to "Back to appointments", appointments_path %>
+<div class="small-container center-block">
+  <h1>Generar nuevo turno</h1>
+  <%= render "appointments/form"%>
+  <div>
+    <%= link_to "Volver a las citas", appointments_path %>
+  </div>
 </div>

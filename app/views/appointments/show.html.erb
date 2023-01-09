@@ -1,10 +1,15 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @appointment %>
-
-<div>
-  <%= link_to "Edit this appointment", edit_appointment_path(@appointment) %> |
-  <%= link_to "Back to appointments", appointments_path %>
-
-  <%= button_to "Destroy this appointment", @appointment, method: :delete %>
+<div class="container">
+    <div class="row">
+        <h1><%=@appointment.user.name%></h1>
+        <h1><%=@appointment.date.to_s%></h1>
+        <h1><%=@appointment.hour.to_s%></h1>
+        <h1><%=@appointment.reason%></h1>
+        <div class="row">
+            <div class=col-2><%= button_to 'Eliminar Sucursal', @appointment , method: :delete %></div>
+            <div class=col-4><%= link_to 'Editar Sucursal', edit_appointment_path(@appointment) %></div>     
+        </div >
+        <div class="row">
+          <%= link_to "Back to appointments", appointments_path %>
+        </div>
+    </div>
 </div>

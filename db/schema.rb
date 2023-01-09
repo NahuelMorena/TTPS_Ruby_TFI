@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_08_190311) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_002438) do
   create_table "appointments", force: :cascade do |t|
     t.date "date", null: false
     t.time "hour", null: false
@@ -21,8 +21,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_08_190311) do
     t.integer "user_id", null: false
     t.integer "branch_office_id", null: false
     t.integer "personal_id"
+    t.integer "state_id", default: 1, null: false
     t.index ["branch_office_id"], name: "index_appointments_on_branch_office_id"
     t.index ["personal_id"], name: "index_appointments_on_personal_id"
+    t.index ["state_id"], name: "index_appointments_on_state_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 
@@ -64,7 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_08_190311) do
   end
 
   create_table "states", force: :cascade do |t|
-    t.string "state"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -98,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_08_190311) do
   end
 
   add_foreign_key "appointments", "branch_offices"
+  add_foreign_key "appointments", "states"
   add_foreign_key "appointments", "users"
   add_foreign_key "branch_offices", "locations"
   add_foreign_key "locations", "provinces"

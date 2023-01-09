@@ -13,7 +13,7 @@ class AppointmentsController < ApplicationController
   
     #POST /appointments
     def create
-      @appointment = Appointment.create(appointment_params)
+      @appointment = current_user.appointments.create(appointment_params)
       redirect_to @appointment
     end
   
@@ -42,6 +42,6 @@ class AppointmentsController < ApplicationController
       end
   
       def appointment_params
-        params.require(:appointment).permit(:date, :hour)
+        params.require(:appointment).permit(:date, :hour, :reason, :branch_office_id, :result, :personal_id)
       end
 end
