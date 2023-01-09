@@ -4,4 +4,8 @@ class Appointment < ApplicationRecord
     belongs_to :branch_office
     belongs_to :state
     enum state: [:slope, :cancelled, :attended]
+
+    def has_role?(filter)
+        self.state.name == filter
+    end
 end

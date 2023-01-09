@@ -1,10 +1,27 @@
 <div class="large-container center-block">
     <h1>Turnos de la sucursal <%= @branch_office.name %></h1>
-    <%= link_to "Agregar nuevo turno",  new_appointment_path %>
-    <h2>Turnos de la sucursal</h2>
+    <% if current_user.role.id == 1 %>
+        <%= link_to "Agregar nuevo turno",  new_appointment_path %>
+    <% end %>
+    <h2>Turnos asignados a la sucursal</h2>
+    <h3>Turnos en espera</h3>
     <div class="container">
-        <div class="row">
-            <%= render @branch_office.appointments %>
-        </div>
+        <% if @branch_office.get_appointments_by_filter("Pendiente").any? %>
+            <div class="row">
+                <%= render @branch_office.get_appointments_by_filter("Pendiente") %>
+            </div>
+        <% else %>
+            <h5>No hay turnos pendientes a ser atendidos...</h5>
+        <% end %>
+    </div>
+    <h3>Turnos atendidos</h3>
+    <div class="container">
+        <% if @branch_office.get_appointments_by_filter("Atendido").any? %>
+            <div class="row">
+                <%= render @branch_office.get_appointments_by_filter("Atendido") %>
+            </div>
+        <% else %>
+            <h5>No se encuentra en el sistema turnos atendidos...</h5>
+        <% end %>
     </div>
 </div>

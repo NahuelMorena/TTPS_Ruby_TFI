@@ -15,6 +15,14 @@
     <%= form.time_field :hour %>
   </div>
 
+  <% if @edit %>
+    <div class="field">
+      <%= form.label :state_id %>
+      <% states = [['Pendiente', 1], ['Cancelado', 3]]%>
+      <%= form.select :state_id, states%>
+    </div>
+  <% end %>
+
   <div>
     <%= form.label :reason, style: "display: block" %>
     <%= form.text_field :reason %>

@@ -12,8 +12,20 @@ class Ability
     unless user.role.name == "Administrador"
       if user.role.name == "Cliente"
         puts "soy Cliente"
+        can :manage, BranchOffice
+
+        can [:show, :create, :update], Appointment
+        
       else  
         puts "Soy personal"
+        can [:show, :appointments], BranchOffice, BranchOffice.all do |item|
+          item.id == user.branch_office_id
+        end
+
+        can [:show, :update], Appointment.all do |item|
+          item.branch_office.id == user.branch_office_id
+        end
+
       end
     else
       puts "Soy administrador"

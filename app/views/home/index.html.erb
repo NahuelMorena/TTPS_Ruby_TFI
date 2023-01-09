@@ -2,3 +2,11 @@
 <p>Find me in app/views/home/index.html.erb</p>
 
 <h1>Hola usuario: <%=current_user.email%></h1>
+
+<% if current_user.role.id == 1 %>
+    <%= render "home/admin"%>
+<% elsif current_user.role.id == 2 %>
+    <%= render "home/personal" %>
+<% else %>
+    <%= render "home/client" %>
+<% end %>

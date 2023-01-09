@@ -1,6 +1,10 @@
 <div class="large-container center-block">
-    <h1>Administración de sucursales</h1>
-    <%= link_to "Agregar nueva sucursal", new_branch_office_path%>
+    <% if current_user.role.id == 1 %>
+        <h1>Administración de sucursales</h1>
+        <%= link_to "Agregar nueva sucursal", new_branch_office_path%>
+    <% else %>
+        <h1>Sucursales disponibles en el sistema</h1>
+    <% end %>
     <h2>Sucursales del sistema</h2>
     <% if can? :manage, BranchOffice %>
     <div class="container">

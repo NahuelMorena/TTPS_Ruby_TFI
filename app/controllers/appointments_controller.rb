@@ -23,6 +23,7 @@ class AppointmentsController < ApplicationController
   
     #GET /appointments/:id/edit
     def edit
+      @edit = true
     end
   
     #PATCH /appointments/:id 
@@ -42,6 +43,6 @@ class AppointmentsController < ApplicationController
       end
   
       def appointment_params
-        params.require(:appointment).permit(:date, :hour, :reason, :branch_office_id, :result, :personal_id)
+        params.require(:appointment).permit(:date, :hour, :reason, :branch_office_id, :result, :personal_id, :state_id)
       end
 end

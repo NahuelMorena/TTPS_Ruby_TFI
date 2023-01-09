@@ -4,17 +4,27 @@
         <h1><%=@branch_office.location.name%></h1>
         <h1><%=@branch_office.direction%></h1>
         <h1><%=@branch_office.phone%></h1>
+        <% if current_user.role.id == 1%>
+            <div class="row">
+                <div class=col-2><%= button_to 'Eliminar Sucursal', @branch_office , method: :delete %></div>
+                <div class=col-4><%= link_to 'Editar Sucursal', edit_branch_office_path(@branch_office) %></div>     
+            </div>
+        <% end %>
+    </div>
+    <% if current_user.role.id == 3 %>
         <div class="row">
-            <div class=col-2><%= button_to 'Eliminar Sucursal', @branch_office , method: :delete %></div>
-            <div class=col-4><%= link_to 'Editar Sucursal', edit_branch_office_path(@branch_office) %></div>     
-        </div >
-    </div>
-    <div class="row">
-        <%= link_to 'Turnos', appointments_branch_office_path%>
-    </div>
+            <%= link_to 'Solicitar cita', new_appointment_path%>
+        </div>
+    <% else %>
+        <div class="row">
+            <%= link_to 'Turnos registrados', appointments_branch_office_path%>
+        </div>
+    <% end %>
     <div class="row">
         <h3>Horarios de atención<h3>
-        <%= link_to "Agregar nuevo dia laboral", new_working_day_path %>
+        <% if current_user.role.id == 1%>
+            <%= link_to "Agregar nuevo dia laboral", new_working_day_path %>
+        <% end %>
         <div class="col-12">
             <table class="table table-primary">
                 <thead>
