@@ -5,6 +5,10 @@
     <p class="text-secondary"><%= "Fecha: " + appointment.date.to_s%></p>
     <p class="text-secondary"><%= "Hora: " + appointment.hour.to_s%></p>
     <p class="text-secondary"><%= "Razon: " + appointment.reason%></p>
-    <%= link_to "Ver más", appointment%>
+    <% if current_user.role.id == 3%>
+      <%= link_to "Ver más", appointment%>
+    <% else %>
+      <%= link_to "Atender turno", attending_appointment_path(appointment)%>
+    <% end %>
   </div>
 </div>

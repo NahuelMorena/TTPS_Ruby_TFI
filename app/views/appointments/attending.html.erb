@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="card padding margin-top">
+    <div class="card-header">
+      <h3 class="text-uppercase">
+        <%= "Cliente: " + @appointment.user.name + " " + @appointment.user.surname%>
+      </h3>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"> <%= "Sucursal: " + @appointment.branch_office.name %></h5>
+      <p class="card-text"> <%= "Dia solicitado: " + @appointment.date.to_s%></p>
+      <p class="card-text"> <%= "Hora solicitado: " + @appointment.hour.to_s%></p>
+      <p class="card-text"> <%= "Razon del turno: " + @appointment.reason%></p>
+      <% if @appointment.state.id == 1 %>
+        <%= form_with(model: @appointment, url: attending_appointment_path , local: true) do |form| %>
+          <div>
+            <%= form.label :result, style: "display: block" %>
+            <%= form.text_field :result %>
+          </div>
+          <div>
+            <%= form.submit %>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="card-text"> <%= "Turno atendido por: " + @appointment.get_personal.name%></p>
+        <p class="card-text"> <%= "Resultado: " + @appointment.result%></p>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to "Volver a los turnos de la sucursal", appointments_branch_office_path %>
+</div>

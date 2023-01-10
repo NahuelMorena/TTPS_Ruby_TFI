@@ -37,5 +37,8 @@ Rails.application.routes.draw do
   resources :provinces
 
   #Appointments routes
-  resources :appointments
+  resources :appointments do
+    get "attending", to: "appointments#attending", on: :member
+    patch "attending", to: "appointments#register_attention", on: :member
+  end
 end

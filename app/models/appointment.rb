@@ -8,4 +8,8 @@ class Appointment < ApplicationRecord
     def has_role?(filter)
         self.state.name == filter
     end
+
+    def get_personal
+        User.find(self.personal_id)
+    end
 end

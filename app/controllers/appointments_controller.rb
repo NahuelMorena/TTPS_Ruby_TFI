@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-    before_action :find_appointment, only: %i[ show edit update destroy ]
+    before_action :find_appointment, only: %i[ show edit update destroy attending register_attention]
   
     #GET /appointments 
     def index
@@ -35,6 +35,18 @@ class AppointmentsController < ApplicationController
     #DELETE /appointments/:id
     def destroy
       @appointment.destroy
+    end
+
+    #GET /appointments/:id/attending
+    def attending
+    end
+
+    #PATCH /appointments/:id/attending
+    def register_attention
+      params[:appointment][:state_id] = 2
+      params[:appointment][:personal_id] = current_user.id
+      @appointment.update(appointment_params)
+      redirect_to @appointment
     end
   
     private
