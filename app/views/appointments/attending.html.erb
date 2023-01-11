@@ -6,9 +6,14 @@
       </h3>
     </div>
     <div class="card-body">
-      <h5 class="card-title"> <%= "Sucursal: " + @appointment.branch_office.name %></h5>
-      <p class="card-text"> <%= "Dia solicitado: " + @appointment.date.to_s%></p>
-      <p class="card-text"> <%= "Hora solicitado: " + @appointment.hour.to_s%></p>
+      <div class="row">
+        <div class="col-6"><h3 class="card-title"><%= "Sucursal: " + @appointment.branch_office.name %></h3></div>
+        <div class="col-6"><p class="card-text"><%= "Dirección: "+ @appointment.branch_office.location.name + " " + @appointment.branch_office.direction %></p></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><p class="card-text"> <%= "Dia solicitado: " + @appointment.date.to_s%></p></div>
+        <div class="col-6"><p class="card-text"> <%= "Hora solicitado: " + @appointment.hour.to_s%></p></div>
+      </div>
       <p class="card-text"> <%= "Razon del turno: " + @appointment.reason%></p>
       <% if @appointment.state.id == 1 %>
         <%= form_with(model: @appointment, url: attending_appointment_path , local: true) do |form| %>
