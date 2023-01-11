@@ -8,7 +8,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-6"><h3 class="card-title"><%= "Sucursal: " + @appointment.branch_office.name %></h3></div>
-        <div class="col-6"><p class="card-text"><%= "Dirección: "+ @appointment.branch_office.location.name + " " + @appointment.branch_office.direction %></p></div>
+        <div class="col-6"><h3 class="card-text"><%= "Dirección: "+ @appointment.branch_office.location.name + " " + @appointment.branch_office.direction %></h3></div>
       </div>
       <div class="row">
         <div class="col-6"><p class="card-text"> <%= "Dia solicitado: " + @appointment.date.to_s%></p></div>
@@ -26,8 +26,13 @@
           </div>
         <% end %>
       <% else %>
-        <p class="card-text"> <%= "Turno atendido por: " + @appointment.get_personal.name%></p>
-        <p class="card-text"> <%= "Resultado: " + @appointment.result%></p>
+        <div class="row">
+          <div class="col-6"><p class="card-text"> <%= "Turno atendido por: " + @appointment.get_personal.name%></p></div>
+          <div class="col-6"><p class="card-text"> <%= "Hora atendida: " + @appointment.updated_at.to_s%></p></div>
+        </div>
+        <div class="row">
+          <div class="col-12"><p class="card-text"> <%= "Resultado: " + @appointment.result%></p></div>
+        </div>
       <% end %>
     </div>
   </div>

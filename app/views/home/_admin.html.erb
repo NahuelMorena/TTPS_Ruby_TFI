@@ -1,1 +1,55 @@
-admin
+<div class="center">
+    <h2>Panel de administración</h2>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <div class="card margin-top" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Sucursales</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Administración</h6>
+          <p class="card-text">Creación, edición y demas operaciones sobre las sucursales del sistema</p>
+          <%= link_to "Administrar", branch_offices_path%>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card margin-top" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Localidades</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Provincias</h6>
+          <p class="card-text">Listado, creación o modificación de las localidades y provincias registradas en el sistema</p>
+          <div class="row">
+            <div class="col-5"><%= link_to "Localidades", locations_path%></div>
+            <div class="col-5 right"><%= link_to "Provincias", provinces_path%></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card margin-top" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Dias de trabajo</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Horarios de atención</h6>
+          <p class="card-text">Administración de los horarios y dias que utilizan las sucursales para operar</p>
+          <div class="row">
+            <div class="col-6"><%= link_to "Dias de trabajo", working_days_path%></div>
+            <div class="col-5 right"><%= link_to "Horarios", attention_times_path%></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card margin-top" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Usuarios</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Administración</h6>
+          <p class="card-text">Administración de los usuarios que se encuentran registrados en el sistema</p>
+          <div class="row">
+            <div class="col-5"><%= link_to "Administrar", users_path%></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

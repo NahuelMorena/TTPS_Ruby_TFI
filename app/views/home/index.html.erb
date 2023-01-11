@@ -1,8 +1,6 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-
-<h1>Hola usuario: <%=current_user.email%></h1>
-
+<div class="center margin-top">
+    <h1>Bienvenido usuario: <%=current_user.role.name%></h1>
+</div>
 <% if current_user.role.id == 1 %>
     <%= render "home/admin"%>
 <% elsif current_user.role.id == 2 %>

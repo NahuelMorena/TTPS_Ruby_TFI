@@ -7,8 +7,10 @@
     <p class="text-secondary"><%= "Razon: " + appointment.reason%></p>
     <% if current_user.role.id == 3%>
       <%= link_to "Ver más", appointment%>
-    <% else %>
+    <% elsif appointment.state_id == 1 %>
       <%= link_to "Atender turno", attending_appointment_path(appointment)%>
+    <% else %>
+      <%= link_to "Ver mas", attending_appointment_path(appointment)%>
     <% end %>
   </div>
 </div>
