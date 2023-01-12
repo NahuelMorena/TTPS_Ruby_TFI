@@ -53,7 +53,7 @@ User.create(email: 'cliente@gmail.com', name: 'Jose', surname: 'Peralta', passwo
 ``` 
 El primer usuario cuyo rol es `Administrador`, puede iniciar sesión ingresando como email `admin@gmail.com` y contraseña `administrador`. La principal funcionalidad de su rol es la de administrar los diferentes modelos que utiliza la aplicación, en lo que abarca la creación, edición, eliminación de sucursales, localidades, franjas horarias, etc. y hasta la posibilidad de crear nuevos usuarios para el sistema.
 
-El segundo usuario cuyo rol es `Personal bancareo`, puede iniciar sesión ingresando como email 'personal@gmail.com' y contraseña `personal`. La principal funcionalidad de su rol es la de atender los turnos que se encuentren `pendientes` en la sucursal en la que se encuentra relacionada.
+El segundo usuario cuyo rol es `Personal bancareo`, puede iniciar sesión ingresando como email `personal@gmail.com` y contraseña `personal`. La principal funcionalidad de su rol es la de atender los turnos que se encuentren `pendientes` en la sucursal en la que se encuentra relacionada.
 
 El  tercer usuario cuyo rol es `Cliente`, puede iniciar sesión ingresando como email `cliente@gmail.com` y contraseña `cliente`. La principal funcionalidad de su rol es la de solicitar turnos en las distintas sucursales del sistema y visualizar su lista de turnos que se encuentren en estado `pendiente` o `atendido`.
 
