@@ -5,6 +5,11 @@
         <%= form.text_field :name %>
     </div>
     <div class="field">
+        <%= form.label :location_id %>
+        <%= form.collection_select :location_id, Location.all, :id, :name, prompt: true%>
+        <%= link_to "Agregar nueva localidad", new_location_url %>    
+    </div>
+    <div class="field">
         <%= form.label :direction %>
         <%= form.text_field :direction %>
     </div>

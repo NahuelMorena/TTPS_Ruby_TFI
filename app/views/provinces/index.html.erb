@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <h3>Provincias cargadas en el sistema<h3>
+        <%= link_to "Agregar nueva provincia", new_province_path%>
+        <div class="col">
+            <table class="table table-primary">
+                <thead>
+                    <tr class="table-info">
+                        <th>Provincia</th>
+                        <th>Localidades registradas</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h4><%= render @provinces %></h4> 
+                </tbody>
+            </table>
+        </div>    
+    </div>
+</div>

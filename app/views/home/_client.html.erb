@@ -1,0 +1,20 @@
+<h3>Turnos en espera</h3>
+<div class="container">
+    <% if @slope_appointments.any? %>
+        <div class="row">
+            <%= render @slope_appointments %>
+        </div>
+    <% else %>
+        <h5>No hay turnos pendientes a ser atendidos...</h5>
+    <% end %>
+</div>
+<h3>Turnos atendidos</h3>
+<div class="container">
+    <% if @attended_appointments.any? %>
+        <div class="row">
+            <%= render @attended_appointments %>
+        </div>
+    <% else %>
+        <h5>No se encuentra en el sistema turnos atendidos...</h5>
+    <% end %>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <h3>Franjas horarias cargadas en el sistema<h3>
+        <%= link_to "Agregar nueva franja horaria", new_attention_time_path%>
+        <div class="col">
+            <table class="table table-primary">
+                <thead>
+                    <tr class="table-info">
+                        <th>Franja horaria</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h4><%= render @attention_times %></h4> 
+                </tbody>
+            </table>
+        </div>    
+    </div>
+</div>

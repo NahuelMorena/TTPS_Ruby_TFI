@@ -1,0 +1,11 @@
+<%= form_with(model: @province, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="padding">
+    <div class="row">
+      <%= form.submit %>
+    </div>
+  </div>
+<% end %>
