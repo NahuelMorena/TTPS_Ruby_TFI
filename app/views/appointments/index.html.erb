@@ -2,7 +2,7 @@
     <h1>Administración de turnos</h1>
     <div class="container">
         <div class="row">
-            <%= render @appointments %>
+            <%= render Appointment.sort_by_date_and_hour(@appointments) %>
         </div>
     </div>
 </div>

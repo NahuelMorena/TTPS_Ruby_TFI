@@ -8,23 +8,25 @@
     <div class="card-body">
       <div class="row">
         <div class="col-6"><h3 class="card-title"><%= "Sucursal: " + @appointment.branch_office.name %></h3></div>
-        <div class="col-6"><h3 class="card-text"><%= "Dirección: "+ @appointment.branch_office.location.name + " " + @appointment.branch_office.direction %></h3></div>
+        <div class="col-6"><h3 class="card-text"><%= "Dirección: "+ @appointment.branch_office.location.name + " | " + @appointment.branch_office.direction %></h3></div>
       </div>
       <div class="row">
         <div class="col-6"><p class="card-text"> <%= "Dia solicitado: " + @appointment.date.to_s%></p></div>
-        <div class="col-6"><p class="card-text"> <%= "Hora solicitado: " + @appointment.hour.to_s%></p></div>
+        <div class="col-6"><p class="card-text"> <%= "Hora solicitado: " + @appointment.hour.strftime("%H:%M")%></p></div>
       </div>
       <p class="card-text"> <%= "Razon del turno: " + @appointment.reason%></p>
       <% if @appointment.state.id == 1 %>
-        <%= form_with(model: @appointment, url: attending_appointment_path , local: true) do |form| %>
-          <div>
-            <%= form.label :result, style: "display: block" %>
-            <%= form.text_field :result %>
-          </div>
-          <div>
-            <%= form.submit %>
-          </div>
-        <% end %>
+        <div class="large-container center-block">
+          <%= form_with(model: @appointment, url: attending_appointment_path , local: true) do |form| %>
+            <div class="field">
+              <%= form.label :result, "Resultado del turno" ,style: "display: block" %>
+              <%= form.text_field :result %>
+            </div>
+            <div class="field">
+              <%= form.submit "Atender turno" %>
+            </div>
+          <% end %>
+        </div>
       <% else %>
         <div class="row">
           <div class="col-6"><p class="card-text"> <%= "Turno atendido por: " + @appointment.get_personal.name%></p></div>
@@ -36,5 +38,7 @@
       <% end %>
     </div>
   </div>
-  <%= link_to "Volver a los turnos de la sucursal", appointments_branch_office_path %>
+  <div class="margin-top">
+    <%= link_to "Volver a los turnos de la sucursal", appointments_branch_office_path(@appointment.branch_office.id) %>
+  </div>
 </div>
