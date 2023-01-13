@@ -3,7 +3,10 @@
     <td><%= working_day.branch_office.name  %></td>
     <td><%= working_day.attention_time.get_by_format %></td> 
     <td>
-        <%= link_to 'Editar', edit_working_day_path(working_day) %>
-        <%= link_to 'Ver mas', working_day %>
+        <div class="row">
+      <div class="col-3"><%= button_to 'Eliminar', working_day , method: :delete , class: "btn btn-danger" %></div>
+      <div class="col-3"><%= link_to 'Editar', edit_working_day_path(working_day), class: "btn btn-primary" %></div>
+      <div class="col-3"><%= link_to 'Ver mas', working_day, class: "btn btn-primary"%></div>
+        </div>
     </td>
 </tr>

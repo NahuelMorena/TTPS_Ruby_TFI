@@ -21,6 +21,10 @@ class BranchOffice < ApplicationRecord
         self.appointments.select {|item| item.has_role?(filter) }
     end
 
+    def get_personal_users
+        User.get_user_by_branch_office(self)
+    end
+
     def valid_appointment(date,hour)
 
         number_day = WorkingDay.get_day_number(date)

@@ -1,8 +1,11 @@
-<div class="col-6">
-    <div class="card padding margin-top">
-        <h3 class="text-uppercase"><%= branch_office.name%></h3>
-        <p class="text-secondary"><%= "Dirección: " + branch_office.direction%></p>
-        <p class="text-secondary"><%= "Número de telefono: " + branch_office.phone%></p>
-        <%= link_to "Ver más", branch_office%>
+<div class="col-4">
+  <div class="card margin-top" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= branch_office.name %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= "Localiadd: " + branch_office.location.name %></h6>
+      <p class="card-text"><%= "Dirección: " + branch_office.direction %></p>
+      <p class="card-text"><%= "Telefono: " + branch_office.phone %></p>
+      <%= link_to "Ver más", branch_office %>
     </div>
+  </div>
 </div>
