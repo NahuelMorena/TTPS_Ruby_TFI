@@ -9,6 +9,10 @@ class BranchOffice < ApplicationRecord
         "Name has already been taken" => "El nombre seleccionado ya se encuentra en uso"
     }
 
+    # Class Methods
+
+    # Instance Methods
+
     def get_error
         error = @@errors[self.errors.full_messages.first] 
         if error.nil? 
