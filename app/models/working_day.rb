@@ -29,6 +29,10 @@ class WorkingDay < ApplicationRecord
         @@days_numbers[Time.new(date[0].to_i,date[1].to_i,date[2].to_i).ctime.split(" ").first]
     end
 
+    def self.get_by_attention_time(attention_time)
+        WorkingDay.where(attention_time_id: attention_time.id)
+    end
+
     #Instance methods
 
     def get_day_name(day_number)  

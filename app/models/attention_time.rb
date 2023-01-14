@@ -12,6 +12,10 @@ class AttentionTime < ApplicationRecord
         return (self.get_hour(hour_start) <= hour) & (self.get_hour(hour_end) >= hour)
     end
 
+    def get_working_days
+      WorkingDay.get_by_attention_time(self)
+    end
+
     private 
 
       def get_hour(hour)
