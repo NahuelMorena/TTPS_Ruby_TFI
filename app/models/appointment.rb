@@ -5,6 +5,14 @@ class Appointment < ApplicationRecord
     belongs_to :state
     enum state: [:slope, :cancelled, :attended]
 
+    #Class methods
+
+    def self.sort_by_date_and_hour(appointments)
+        appointments.sort_by {|obj| [obj.date, obj.hour] }
+    end 
+
+    #Instance methods
+
     def has_role?(filter)
         self.state.name == filter
     end

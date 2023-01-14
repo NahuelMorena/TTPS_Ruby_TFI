@@ -8,7 +8,7 @@
     <div class="container">
         <% if @branch_office.get_appointments_by_filter("Pendiente").any? %>
             <div class="row">
-                <%= render @branch_office.get_appointments_by_filter("Pendiente") %>
+                <%= render Appointment.sort_by_date_and_hour(@branch_office.get_appointments_by_filter("Pendiente")) %>
             </div>
         <% else %>
             <h5>No hay turnos pendientes a ser atendidos...</h5>
@@ -18,7 +18,7 @@
     <div class="container">
         <% if @branch_office.get_appointments_by_filter("Atendido").any? %>
             <div class="row">
-                <%= render @branch_office.get_appointments_by_filter("Atendido") %>
+                <%= render Appointment.sort_by_date_and_hour(@branch_office.get_appointments_by_filter("Atendido")) %>
             </div>
         <% else %>
             <h5>No se encuentra en el sistema turnos atendidos...</h5>

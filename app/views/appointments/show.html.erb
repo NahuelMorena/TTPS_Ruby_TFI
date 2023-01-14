@@ -1,17 +1,41 @@
 <div class="container">
-    <div class="row">
-        <h1><%=@appointment.user.name%></h1>
-        <h1><%=@appointment.date.to_s%></h1>
-        <h1><%=@appointment.hour.to_s%></h1>
-        <h1><%=@appointment.reason%></h1>
-        <h1><%=@appointment.state.name%></h1>
-        <div class="row">
-            <div class=col-4><%= link_to 'Editar Turno', edit_appointment_path(@appointment) %></div>     
-        </div >
-        <% if current_user == 2%>
-            <div class="row">
-                <%= link_to "Back to appointments", appointments_path %>
-            </div>
-        <% end %>
+  <div class="card padding margin-top">
+    <div class="card-header">
+      <h3 class="text-uppercase">
+        <%= "Cliente: " + @appointment.user.name + " " + @appointment.user.surname%>
+      </h3>
     </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6"><h3 class="card-title"><%= "Sucursal: " + @appointment.branch_office.name %></h3></div>
+        <div class="col-6"><h3 class="card-text"><%= "Dirección: "+ @appointment.branch_office.location.name + " " + @appointment.branch_office.direction %></h3></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><p class="card-text"> <%= "Dia solicitado: " + @appointment.date.to_s%></p></div>
+        <div class="col-6"><p class="card-text"> <%= "Hora solicitado: " + @appointment.hour.strftime("%H:%M")%></p></div>
+      </div>
+      <div class="row">
+        <p class="card-text"> <%= "Razon del turno: " + @appointment.reason%></p>
+      </div>
+      <div class="row">
+        <div class="col-6"><p class="card-text"><%= "Estado del turno: "+ @appointment.state.name%></p></div>
+      </div>
+      <% if @appointment.state.id == 2 %>
+        <div class="row">
+          <div class="col-6"><p class="card-text"> <%= "Turno atendido por: " + @appointment.get_personal.name%></p></div>
+          <div class="col-6"><p class="card-text"> <%= "Hora atendida: " + @appointment.updated_at.strftime("%H:%M")%></p></div>
+        </div>
+        <div class="row">
+          <div class="col-12"><p class="card-text"> <%= "Resultado: " + @appointment.result%></p></div>
+        </div>
+      <% else %>
+          <div class="row">
+            <div class=col-4><%= link_to 'Editar Turno', edit_appointment_path(@appointment), class: "btn btn-primary margin-top" %></div>     
+          </div >
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <%= link_to "Volver al menu de turnos", root_path, class: "margin-top" %>
+  </div>
 </div>

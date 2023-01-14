@@ -1,6 +1,28 @@
-<h1><%=@working_day.day%></h1>
-<h1><%=@working_day.attention_time_id%></h1>
+<div class="container">
+  
+  <div class="card padding margin-top">
+    <div class="card-header">
+      <h3 class="text-uppercase">
+        <%= "Día: " + @working_day.get_day_name(@working_day.day) %>
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6"><h3 class="card-title"><%= "Sucursal relacionada: " + @working_day.branch_office.name %></h3></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><p class="card-text"> <%= "ID de la franja horaria relacionada: " + @working_day.attention_time_id.to_s %></p></div>
+        <div class="col-6"><p class="card-text"> <%= "Franja horaria: " + @working_day.attention_time.get_by_format %></p></div>
+      </div>
+      <div class="row padding">
+        <div class=col-2><%= link_to 'Editar día de trabajo', edit_working_day_path(@working_day), class: "btn btn-primary" %></div> 
+        <div class=col-2><%= button_to 'Eliminar día de trabajo', @working_day, method: :delete , class: "btn btn-danger" %></div>         
+      </div>
+    </div>
+  </div>
 
-<div>
-    <%= button_to 'Eliminar articulo', @working_day , method: :delete %>
+  <div class="row">
+    <%= link_to "Volver al menu de dias de trabajo", working_days_path, class: "padding" %>
+  </div>
+
 </div>

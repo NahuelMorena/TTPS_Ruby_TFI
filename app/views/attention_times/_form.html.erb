@@ -1,14 +1,16 @@
-<%= form_with(model: @attention_time, local: true) do |form| %>
+<div class="card padding margin-top">
+  <%= form_with(model: @attention_time, local: true) do |form| %>
 
     <div class="field">
-        <%= form.label :hour_start, "Hora inicial" %>
-        <%= form.time_field :hour_start %>
+      <%= form.label :hour_start, "Hora inicial" %>
+      <%= form.time_field :hour_start %>
     </div>
     <div class="field">
-        <%= form.label :hour_end, "Hora final" %>
-        <%= form.time_field :hour_end%>
+      <%= form.label :hour_end, "Hora final" %>
+      <%= form.time_field :hour_end%>
     </div>
     <div class="field">
-        <%= form.submit%>
+      <%= form.submit%>
     </div>
-<%end%>
+  <%end%>
+</div>

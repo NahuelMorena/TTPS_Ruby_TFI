@@ -1,7 +1,24 @@
 class AttentionTime < ApplicationRecord
     has_many :working_days
 
+    # Class Methods
+
+    # Instance Methods
     def get_by_format
-        "#{hour_start.strftime("%H:%M")} - #{hour_end.strftime("%H:%M")}"
+        "#{self.get_hour(hour_start)} - #{self.get_hour(hour_end)}"
     end
+
+    def valid_time?(hour)
+        return (self.get_hour(hour_start) <= hour) & (self.get_hour(hour_end) >= hour)
+    end
+
+    def get_working_days
+      WorkingDay.get_by_attention_time(self)
+    end
+
+    private 
+
+      def get_hour(hour)
+        hour.strftime("%H:%M")
+      end
 end

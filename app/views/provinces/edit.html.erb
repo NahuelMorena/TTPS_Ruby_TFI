@@ -1,10 +1,8 @@
-<h1>Editing province</h1>
-
-<%= render "form", province: @province %>
-
-<br>
-
-<div>
-  <%= link_to "Show this province", @province %> |
-  <%= link_to "Back to provinces", provinces_path %>
+<div class="small-container center-block">
+    <div class="row center"><h2>Edición de provincia</h2></div>
+    <%= render "provinces/form"%>
+    <div>
+      <%= link_to "Mostrar información", @province %> |
+      <%= link_to "Volver a lista de provincias", provinces_path %>
+    </div>
 </div>

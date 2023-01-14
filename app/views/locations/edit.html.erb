@@ -1,10 +1,8 @@
-<h1>Editing location</h1>
-
-<%= render "form", location: @location %>
-
-<br>
-
-<div>
-  <%= link_to "Show this location", @location %> |
-  <%= link_to "Back to locations", locations_path %>
+<div class="small-container center-block">
+    <div class="row center"><h2>Edición de localidad</h2></div>
+    <%= render "locations/form"%>
+    <div>
+      <%= link_to "Show this location", @location %> |
+      <%= link_to "Back to locations", locations_path %>
+    </div>
 </div>
