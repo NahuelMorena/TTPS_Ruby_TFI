@@ -3,15 +3,19 @@ class UsersController < ApplicationController
     #before_action :authenticate_user!, except: %i[ show ]
     load_and_authorize_resource
     #skip_authorize_resource only: :new
-    before_action :find_user, only: %i[ show edit update destroy ]
+    before_action :find_user, only: %i[ show edit update destroy editPassword]
 
     #GET /users
     def index
-        @users = User.all
+        user = User.all
+        @admins = user.select {|item| item.role_id == 1}
+        @personals = user.select {|item| item.role_id == 2}
+        @clients = user.select {|item| item.role_id == 3}
     end
 
     #GET /users/new
     def new
+        @create = true
         @user = User.new
         @url = admin_create_users_path
     end
@@ -37,6 +41,7 @@ class UsersController < ApplicationController
 
     #GET /users/:id/edit
     def edit
+      @edit = true
       @url = @user
     end
 
@@ -57,6 +62,11 @@ class UsersController < ApplicationController
         redirect_to users_path, notice: "El usuario fue eliminado satisfactoriamente"
     end
 
+    #GET /users/:id/editPassword
+    def editPassword 
+      @url = @user
+    end
+
     private 
       def find_user
         @user = User.find(params[:id])
@@ -68,20 +78,25 @@ class UsersController < ApplicationController
 
       def validate_params(email, password, password_comfirmation)
         message = nil
-        email = email.downcase
+
+        if email
+          email = email.downcase
         
-        if User.where(email: email).any?
-          unless @user && User.where(email: email).first.id == @user.id
-            message = "El mail seleccionado se encuentra en uso"
+          if User.where(email: email).any?
+            unless @user && User.where(email: email).first.id == @user.id
+              message = "El mail seleccionado se encuentra en uso"
+            end
           end
-        end
+        end 
+        
+        if password
+          if password.size < 6
+            message = "La contraseña debe poseer al menos 6 caracteres"
+          end
 
-        if password.size < 6
-          message = "La contraseña debe poseer al menos 6 caracteres"
-        end
-
-        if password != password_comfirmation
-          messague = "Las contraseñas ingresadas no coinciden"
+          if password != password_comfirmation
+            messague = "Las contraseñas ingresadas no coinciden"
+          end
         end
         message
       end 

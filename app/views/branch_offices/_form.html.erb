@@ -2,20 +2,20 @@
   <%= form_with(model: @branch_office, local: true) do |form| %>
 
     <div class="field">
-        <%= form.label :name %>
+        <%= form.label :name, "Nombre"%>
         <%= form.text_field :name %>
     </div>
     <div class="field">
-        <%= form.label :location_id %>
+        <%= form.label :location_id, "Localidad" %>
         <%= form.collection_select :location_id, Location.all, :id, :name, prompt: true%>
         <%= link_to "Agregar nueva localidad", new_location_url %>    
     </div>
     <div class="field">
-        <%= form.label :direction %>
+        <%= form.label :direction, "Dirección" %>
         <%= form.text_field :direction %>
     </div>
     <div class="field">
-        <%= form.label :phone %>
+        <%= form.label :phone, "Telefono" %>
         <%= form.text_field :phone %>
     </div>
     <div class="field">

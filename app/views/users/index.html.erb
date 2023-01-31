@@ -4,7 +4,16 @@
     <h2>Usuarios del sistema</h2>
     <div class="container">
         <div class="row">
-            <%= render @users %>
+            <h2 class="center">Administradores</h2>
+            <%= render @admins %>
+        </div>
+        <div class="row">
+            <h2 class="center">Personales Bancarios</h2>
+            <%= render @personals%>
+        </div>
+        <div class="row">
+            <h2 class="center">Clientes</h2>
+            <%= render @clients%>
         </div>
     </div>
 </div>
