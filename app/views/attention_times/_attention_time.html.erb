@@ -1,7 +1,10 @@
 <tr>
-    <td><%= attention_time.get_by_format %></td>
-    <td> 
-        <%= link_to 'Editar', edit_attention_time_path(attention_time) %>
-        <%= link_to 'Ver mas', attention_time %>
-    </td> 
+  <td class="center"><%= attention_time.get_by_format %></td>
+  <td>
+    <div class="row">
+      <div class="col-3"><%= button_to 'Eliminar', attention_time , method: :delete , class: "btn btn-danger" %></div>
+      <div class="col-3"><%= link_to 'Editar', edit_attention_time_path(attention_time), class: "btn btn-primary" %></div>
+      <div class="col-3"><%= link_to 'Ver mas', attention_time, class: "btn btn-primary"%></div>
+    </div>
+  </td>
 </tr>

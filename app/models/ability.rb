@@ -37,6 +37,9 @@ class Ability
       can :manage, WorkingDay
 
       can :manage, User
+      cannot :editPassword, User, User.all do |item|
+        item.id != user.id
+      end
     end
 
 

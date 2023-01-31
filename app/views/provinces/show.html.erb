@@ -1,10 +1,46 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  
+  <div class="card padding margin-top">
+    <div class="card-header">
+      <h3 class="text-uppercase">
+        <%= "Nombre: " + @province.name %>
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6"><p class="card-text"> <%= "Localidades registradas: " + @province.locations.size.to_s %></p></div>
+        <div class="col-6"><p class="card-text"> <%= "Sucursales registradas: " + @province.get_branch_offices.to_s %></p></div>
+      </div>
+      <div class="row padding">
+        <div class=col-2><%= link_to 'Editar día de trabajo', edit_province_path(@province), class: "btn btn-primary" %></div> 
+        <div class=col-2><%= button_to 'Eliminar día de trabajo', @province, method: :delete , class: "btn btn-danger" %></div>         
+      </div>
+    </div>
+  </div>
 
-<%= render @province %>
+  <div class="row">
+    <%= link_to "Volver al menu de dias de trabajo", working_days_path, class: "padding" %>
+  </div>
 
-<div>
-  <%= link_to "Edit this province", edit_province_path(@province) %> |
-  <%= link_to "Back to provinces", provinces_path %>
+  <div class="row">
+    <h3>Localidades registradas</h3>
+    <div class="col">
+      <table class="table table-primary">
+        <thead>
+          <tr class="table-info">
+            <th>Provincia</th>
+            <th>Localidad</th>
+            <th>Sucursales registradas</th>
+            <th>Operaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <h4><%= render @province.locations %></h4> 
+        </tbody>
+      </table>
+    </div>    
+  </div>
 
-  <%= button_to "Destroy this province", @province, method: :delete %>
 </div>
+
+

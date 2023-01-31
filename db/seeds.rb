@@ -19,7 +19,7 @@ State.create(name: 'Cancelado')
 
 # Provincias
 province = Province.create(name: 'Buenos Aires')
-Province.create(name: 'Ciudad Autónoma de buenos Aires')
+Province.create(name: 'CABA')
 Province.create(name: 'Catamarca')
 Province.create(name: 'Chaco')
 Province.create(name: 'Chubut')

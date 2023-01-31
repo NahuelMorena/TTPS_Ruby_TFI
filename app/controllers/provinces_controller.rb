@@ -5,7 +5,7 @@ class ProvincesController < ApplicationController
 
     #GET /provinces
     def index
-      @provinces = Province.all
+      @provinces = Province.all.sort_by(&:name)
     end
 
     #GET /provinces/new
