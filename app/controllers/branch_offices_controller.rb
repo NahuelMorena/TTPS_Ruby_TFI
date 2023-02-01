@@ -43,12 +43,15 @@ class BranchOfficesController < ApplicationController
 
     #DELETE /branch_offices/:id
     def destroy
-        unless @branch_office.working_days.empty?
-            redirect_to @branch_office, alert: "No se puede eliminar sucursales con dias laborales"
-        else 
+
+        message = evaluate_delete_condition()
+
+        if message
+            redirect_to @branch_office, alert: message
+        else
             @branch_office.destroy
             redirect_to branch_offices_path, notice: "Sucursal eliminada satisfactoriamente"
-        end 
+        end
     end
 
     #GET /branch_offices/:id/appointments
@@ -64,7 +67,25 @@ class BranchOfficesController < ApplicationController
         params.require(:branch_office).permit(:name,:direction,:phone,:location_id)
       end
 
-      def validate_params()
+      def evaluate_delete_condition
+        message = ""
+
+        unless @branch_office.working_days.empty?
+            return "No se puede eliminar sucursales con dias laborales"
+        end
+    
+        unless Appointment.get_by_branch_office(@branch_office).empty?
+            return "No se puede eliminar sucursal por que cuenta con turnos pendientes"
+        end
+
+        unless User.get_user_by_branch_office(branchoffice).empty?
+            return "No se puede eliminar sucursal por que se encuentran personales bancarios asignados"
+        end
+
+        message
+      end
+
+      def validate_params
         #valida que los datos ingresados sean validos
       end
 end

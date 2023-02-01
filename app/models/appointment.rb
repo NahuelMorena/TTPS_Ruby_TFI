@@ -11,6 +11,10 @@ class Appointment < ApplicationRecord
         appointments.sort_by {|obj| [obj.date, obj.hour] }
     end 
 
+    def self.get_by_branch_office(branch_office)
+        Appointment.where(branch_office_id: branch_office.id)
+    end
+
     #Instance methods
 
     def has_role?(filter)
