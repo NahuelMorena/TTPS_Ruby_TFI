@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @url = admin_create_users_path
+    @button_text = "Crear nuevo usuario"
   end
 
   #POST /users
@@ -42,6 +43,7 @@ class UsersController < ApplicationController
   def edit
     @edit = true
     @url = @user
+    @button_text = "Actualizar usuario"
   end
 
   #PATCH /users/:id    

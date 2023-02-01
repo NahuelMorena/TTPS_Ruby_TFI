@@ -14,9 +14,9 @@
     </div>
 
     <% if current_user %> 
-      <% if current_user.role.name == "Administrador"%>
+      <% if (@user != current_user) && (current_user.role.name == "Administrador") %>
         <div class="field">
-          <%= form.label :role_id %>
+          <%= form.label :role_id, "Rol en el sistema" %>
           <%= form.collection_select :role_id, Role.all, :id, :name, prompt: true%>
         </div>
         <div class="field">
@@ -41,7 +41,7 @@
     <% end %>
     <div class="padding">
       <div class="row">
-        <%= form.submit %>
+        <%= form.submit @button_text, class:"btn btn-primary"%>
       </div>
     </div>
   <% end %>

@@ -11,6 +11,7 @@ class BranchOfficesController < ApplicationController
     #GET /branch_offices/new
     def new
         @branch_office = BranchOffice.new
+        @button_text = "Crear sucursal"
     end
 
     #POST /branch_offices
@@ -29,6 +30,7 @@ class BranchOfficesController < ApplicationController
 
     #GET /branch_offices/:id/edit
     def edit
+        @button_text = "Actualizar sucursal"
     end
 
     #PATCH /branch_offices/:id

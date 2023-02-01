@@ -11,6 +11,7 @@ class WorkingDaysController < ApplicationController
     #GET /working_days/new
     def new
         @working_day = WorkingDay.new
+        @button_text = "Crear dia de trabajo"
     end
 
     #POST /working_days
@@ -29,6 +30,7 @@ class WorkingDaysController < ApplicationController
 
     #GET /working_days/:id/edit
     def edit
+        @button_text = "Actualizar dia de trabajo"
     end
 
     #PATCH /working_days/:id

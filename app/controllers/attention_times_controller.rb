@@ -11,6 +11,7 @@ class AttentionTimesController < ApplicationController
     #GET /attention_times/new
     def new
         @attention_time = AttentionTime.new
+        @button_text = "Agregar franja horaria"
     end
 
     #POST /attention_times
@@ -29,6 +30,7 @@ class AttentionTimesController < ApplicationController
 
     #GET /attention_times/:id/edit
     def edit
+        @button_text = "Actualizar franja horaria"
     end
     
     #PATCH /attention_times/:id

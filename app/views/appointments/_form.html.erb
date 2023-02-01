@@ -28,9 +28,10 @@
       <%= form.label :reason, "Razón de solicitud", style: "display: block" %>
       <%= form.text_field :reason %>
     </div>
+
     <div class="padding">
       <div class="row">
-        <%= form.submit %>
+        <%= form.submit @button_text, class:"btn btn-primary"%>
       </div>
     </div>
   <%end%>

@@ -9,6 +9,7 @@ class AppointmentsController < ApplicationController
     #GET /appointments/new
     def new
       @appointment = Appointment.new
+      @button_text = "Crear turno"
     end
   
     #POST /appointments
@@ -30,6 +31,7 @@ class AppointmentsController < ApplicationController
     #GET /appointments/:id/edit
     def edit
       @edit = true
+      @button_text = "Actualizar turno"
     end
   
     #PATCH /appointments/:id 

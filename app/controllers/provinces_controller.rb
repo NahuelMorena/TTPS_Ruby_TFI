@@ -11,6 +11,7 @@ class ProvincesController < ApplicationController
     #GET /provinces/new
     def new
       @province = Province.new
+      @button_text = "Agregar provincia al sistema"
     end
 
     #POST /provinces 
@@ -29,6 +30,7 @@ class ProvincesController < ApplicationController
 
     #GET /provinces/:id/edit
     def edit
+      @button_text = "Actualizar provincia"
     end
 
     #PATCH /provinces/:id

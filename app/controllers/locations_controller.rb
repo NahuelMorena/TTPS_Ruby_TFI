@@ -11,6 +11,7 @@ class LocationsController < ApplicationController
     #GET /locations/new
     def new
       @location = Location.new
+      @button_text = "Agregar localidad al sistema"
     end
 
     #POST /locations 
@@ -29,6 +30,7 @@ class LocationsController < ApplicationController
 
     #GET /locations/:id/edit
     def edit
+      @button_text = "Actualizar localidad"
     end
     
     #PATCH /locations/:id
