@@ -1,5 +1,4 @@
 class LocationsController < ApplicationController
-    before_action :authenticate_user!
     load_and_authorize_resource
     before_action :find_location, only: %i[ show edit update destroy ]
 
@@ -15,12 +14,13 @@ class LocationsController < ApplicationController
 
     #POST /locations 
     def create
-      if Location.where(name: params[:location][:name], province_id: params[:location][:province_id]).any?
-        redirect_to new_location_path, alert: "La combinación de nombre de localidad y provincia ya se encuentra en el sistema"
-      else
-        @location = Location.create(location_params)
-        redirect_to @location, notice: "Localización creada exitosamente"
+      @location = Location.create(location_params)
+
+      if @location.invalid?
+        return redirect_to new_location_path, alert: @location.errors.full_messages.first
       end
+
+      redirect_to @location, notice: "Localización creada exitosamente"
     end
 
     #GET /locations/:id
@@ -33,19 +33,22 @@ class LocationsController < ApplicationController
     
     #PATCH /locations/:id
     def update
-      if Location.where(name: params[:location][:name], province_id: params[:location][:province_id]).any?
-        redirect_to edit_location_path, alert: "La combinación de nombre de localidad y provincia ya se encuentra en el sistema"
-      else
-        @location.update(location_params)
-        redirect_to locations_path , notice: "Localidad actualizada exitosamente"
+      @location.update(location_params)
+
+      if @location.invalid?
+        return redirect_to edit_location_path, alert: @location.errors.full_messages.first
       end
+
+      redirect_to locations_path , notice: "Localidad actualizada exitosamente"
     end
 
     #DELETE /locations/:id
     def destroy
-      unless @location.branch_offices.empty?
-        redirect_to @location, alert: "No se puede eliminar una localidad con sucursales en el sistema"
-      else 
+      message = evaluate_delete_condition()
+
+      if message
+        redirect_to @location, alert: message
+      else
         @location.destroy
         redirect_to locations_path, notice: "Localidad eliminada satisfactoriamente"
       end
@@ -58,5 +61,15 @@ class LocationsController < ApplicationController
 
       def location_params
         params.require(:location).permit(:name, :province_id)
+      end
+
+      def evaluate_delete_condition
+        message = ""
+
+        unless @location.branch_offices.empty?
+          return "No se puede eliminar una localidad con sucursales en el sistema"
+        end
+
+        message
       end
 end

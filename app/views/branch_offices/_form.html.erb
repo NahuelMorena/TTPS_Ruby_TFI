@@ -6,8 +6,8 @@
         <%= form.text_field :name %>
     </div>
     <div class="field">
-        <%= form.label :location_id %>
-        <%= form.collection_select :location_id, Location.all, :id, :name, prompt: true%>
+        <%= form.label :location_id, "Localidad" %>
+        <%= form.collection_select :location_id , Location.all, :id, :name %>
         <%= link_to "Agregar nueva localidad", new_location_url %>    
     </div>
     <div class="field">
@@ -18,8 +18,11 @@
         <%= form.label :phone %>
         <%= form.text_field :phone %>
     </div>
-    <div class="field">
-        <%= form.submit%>
+
+    <div class="padding">
+      <div class="row">
+        <%= form.submit class:"btn btn-primary"%>
+      </div>
     </div>
   <%end%>
 </div>

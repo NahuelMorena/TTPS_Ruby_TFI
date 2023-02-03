@@ -1,34 +1,38 @@
-<%= form_with(model: @appointment, local: true) do |form| %>
+<div class="card padding margin-top">
+  <%= form_with(model: @appointment, local: true) do |form| %>
 
-  <div class="field">
-    <%= form.label :branch_office_id %>
-    <%= form.collection_select :branch_office_id, BranchOffice.all, :id, :name, prompt: true%>   
-  </div>
-
-  <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
-  </div>
-
-  <div>
-    <%= form.label :hour, style: "display: block" %>
-    <%= form.time_field :hour %>
-  </div>
-
-  <% if @edit %>
     <div class="field">
-      <%= form.label :state_id %>
-      <% states = [['Pendiente', 1], ['Cancelado', 3]]%>
-      <%= form.select :state_id, states%>
+      <%= form.label :date, style: "display: block" %>
+      <%= form.date_field :date %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :reason, style: "display: block" %>
-    <%= form.text_field :reason %>
-  </div>
+    <div class="field">
+      <%= form.label :hour, style: "display: block" %>
+      <%= form.time_field :hour %>
+    </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<%end%>
+     <div class="field">
+      <%= form.label :branch_office_id, "Sucursal"%>
+      <%= form.collection_select :branch_office_id, BranchOffice.all, :id, :name%>   
+    </div>
+
+    <% if @edit %>
+      <div class="field">
+        <%= form.label :state_id, "Estado del turno" %>
+        <% states = [['Pendiente', 1], ['Cancelado', 3]]%>
+        <%= form.select :state_id, states%>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :reason, "Razón de solicitud", style: "display: block" %>
+      <%= form.text_field :reason %>
+    </div>
+
+    <div class="padding">
+      <div class="row">
+        <%= form.submit class:"btn btn-primary"%>
+      </div>
+    </div>
+  <%end%>
+</div>

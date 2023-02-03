@@ -1,5 +1,4 @@
 class AttentionTimesController < ApplicationController
-    before_action :authenticate_user!
     load_and_authorize_resource
     before_action :find_attention_time, except: %i[ new create index]
 
@@ -16,11 +15,16 @@ class AttentionTimesController < ApplicationController
     #POST /attention_times
     def create 
         if AttentionTime.find_by_hour_start_and_hour_end(params[:attention_time][:hour_start], params[:attention_time][:hour_end])
-            redirect_to new_attention_time_path, alert: "La franja horaria ya existe en el sistema"
-        else  
-            @attention_time = AttentionTime.create(attention_time_params)
-            redirect_to attention_times_path
+            return redirect_to new_attention_time_path, alert: "La franja horaria ya existe en el sistema"
         end
+
+        @attention_time = AttentionTime.create(attention_time_params)
+        
+        if @attention_time.invalid?
+            return redirect_to new_attention_time_path, alert: @attention_time.errors.full_messages.first
+        end
+        
+        redirect_to @attention_time
     end
 
     #GET /attention_times/:id
@@ -34,17 +38,24 @@ class AttentionTimesController < ApplicationController
     #PATCH /attention_times/:id
     def update
         if AttentionTime.find_by_hour_start_and_hour_end(params[:attention_time][:hour_start], params[:attention_time][:hour_end])
-            redirect_to edit_attention_time_path, alert: "La franja horaria ya existe en el sistema"
-        else  
-            @attention_time.update(attention_time_params)
-            redirect_to attention_times_path
+            return redirect_to edit_attention_time_path, alert: "La franja horaria ya existe en el sistema"
         end
+        
+        @attention_time.update(attention_time_params)
+            
+        if @attention_time.invalid?
+            return redirect_to edit_attention_time_path, alert: @attention_time.errors.full_messages.first
+        end
+        
+        redirect_to @attention_time
     end
     
     #DELETE /attention_times/:id
     def destroy
-        unless @attention_time.working_days.empty?
-            redirect_to @attention_time, alert: "No se puede eliminar franjas horarias que se encuentren en uso"
+        message = evaluate_delete_condition()
+
+        if message
+            redirect_to @attention_time, alert: message
         else
             @attention_time.destroy
             redirect_to attention_times_path, notice: "La franja horaria fue eliminada satisfactoriamente"
@@ -58,5 +69,15 @@ class AttentionTimesController < ApplicationController
 
       def attention_time_params
         params.require(:attention_time).permit(:hour_start,:hour_end)
+      end
+
+      def evaluate_delete_condition
+        message = ""
+
+        unless @attention_time.working_days.empty?
+            return "No se puede eliminar franjas horarias que se encuentren en uso"
+        end
+
+        message
       end
 end

@@ -24,7 +24,7 @@
           <div class=col-2><%= link_to 'Editar Sucursal', edit_branch_office_path(@branch_office), class: "btn btn-primary" %></div> 
           <div class=col-2><%= button_to 'Eliminar Sucursal', @branch_office , method: :delete , class: "btn btn-danger" %></div>         
       <% elsif current_user.role.id == 3 %>
-        <div class="col-2"><%= link_to 'Solicitar cita', new_appointment_path, class: "btn btn-primary"%></div>
+        <div class="col-2"><%= link_to 'Solicitar turno', new_appointment_path, class: "btn btn-primary"%></div>
       <% else %>
         <%= link_to 'Turnos registrados', appointments_branch_office_path, class: "btn btn-primary"%>
       <% end %>

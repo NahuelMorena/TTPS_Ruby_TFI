@@ -1,9 +1,13 @@
-<div class="col-6">
-    <div class="card padding margin-top">
-        <h3 class="text-uppercase"><%= user.name%></h3>
-        <h3 class="text-uppercase"><%= user.surname%></h3>
-        <p class="text-secondary"><%= "Email: " + user.email%></p>
-        <p class="text-secondary"><%= "Rol: " + user.role.name%></p>
-        <%= link_to "Ver más", user%>
+<div class="col-4">
+  <div class="card margin-top" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= user.name + " " + user.surname%></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= "Email: " + user.email %></h6>
+      <p class="card-text"><%= "Rol: " + user.role.name %></p>
+      <% if user.role.name == "Personal bancario" %>
+        <p class="card-text"><%= "Sucursal asignada: " + BranchOffice.find(user.branch_office_id).name %></p>
+      <% end %>
+      <%= link_to "Ver más", user %>
     </div>
+  </div>
 </div>

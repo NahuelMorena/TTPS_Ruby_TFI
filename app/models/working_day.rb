@@ -1,7 +1,10 @@
 class WorkingDay < ApplicationRecord
+    validates :day, presence: true, uniqueness: { scope: [:branch_office_id]}
+    validates :branch_office, :attention_time, presence: true
+
     belongs_to :branch_office
     belongs_to :attention_time
-
+    
     @@days_names = { 
         "1" => "Lunes", 
         "2" => "Martes", 

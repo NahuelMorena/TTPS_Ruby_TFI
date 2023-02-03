@@ -1,8 +1,11 @@
 <tr>
-    <td><%= province.name %></td>
-    <td><%= province.locations.size  %></td>
-    <td>
-        <%= link_to 'Editar', edit_province_path(province) %>
-        <%= link_to 'Ver mas', province %>
-    </td>
+  <td class="center"><%= province.name %></td>
+  <td class="center"><%= province.locations.size  %></td>
+  <td>
+    <div class="row">
+      <div class="col-3"><%= button_to 'Eliminar', province , method: :delete , class: "btn btn-danger" %></div>
+      <div class="col-3"><%= link_to 'Editar', edit_province_path(province), class: "btn btn-primary" %></div>
+      <div class="col-4"><%= link_to 'Ver mas', province, class: "btn btn-primary"%></div>
+    </div>
+  </td>
 </tr>

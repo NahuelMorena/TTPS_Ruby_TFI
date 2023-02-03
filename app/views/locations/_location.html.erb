@@ -1,9 +1,13 @@
 <tr>
-    <td><%= location.province.name %></td>
-    <td><%= location.name  %></td>
-    <td><%= location.branch_offices.size %></td> 
-    <td>
-        <%= link_to 'Editar', edit_location_path(location) %>
-        <%= link_to 'Ver mas', location %>
-    </td>
+  <td class="center"><%= location.province.name %></td>
+  <td class="center"><%= location.name  %></td>
+  <td class="center"><%= location.branch_offices.size %></td>
+
+  <td>
+    <div class="row">
+      <div class="col-3"><%= button_to 'Eliminar', location , method: :delete , class: "btn btn-danger" %></div>
+      <div class="col-3"><%= link_to 'Editar', edit_location_path(location), class: "btn btn-primary" %></div>
+      <div class="col-4"><%= link_to 'Ver mas', location, class: "btn btn-primary"%></div>
+    </div>
+  </td>
 </tr>

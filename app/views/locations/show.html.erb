@@ -1,10 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="card padding margin-top">
+    <div class="card-header">
+      <h3 class="text-uppercase">
+        <%= "Nombre: " + @location.name %>
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6"><p class="card-text"> <%= "Provincia: " + @location.province.name %></p></div>
+        <div class="col-6"><p class="card-text"> <%= "Sucursales registradas: " + @location.get_branch_offices.size.to_s %></p></div>
+      </div>
+      <div class="row padding">
+        <div class=col-2><%= link_to 'Editar Localidad', edit_location_path(@location), class: "btn btn-primary" %></div> 
+        <div class=col-3><%= button_to 'Eliminar Localidad', @location, method: :delete , class: "btn btn-danger" %></div>         
+      </div>
+    </div>
+  </div>
 
-<%= render @location %>
+  <div class="row">
+    <%= link_to "Volver al menu de localidades", locations_path, class: "padding" %>
+  </div>
 
-<div>
-  <%= link_to "Edit this location", edit_location_path(@location) %> |
-  <%= link_to "Back to locations", locations_path %>
-
-  <%= button_to "Destroy this location", @location, method: :delete %>
+  <div class="row">
+    <h3>Sucursales registradas</h3>
+    <%= render @location.get_branch_offices %>
+  </div>
 </div>

@@ -1,5 +1,4 @@
 class BranchOfficesController < ApplicationController
-    before_action :authenticate_user!
     load_and_authorize_resource
     before_action :find_branch_office, except: %i[new create index appointments]
     
@@ -16,8 +15,9 @@ class BranchOfficesController < ApplicationController
     #POST /branch_offices
     def create 
         @branch_office = BranchOffice.create(branch_office_params)
+
         if @branch_office.invalid?
-            redirect_to new_branch_office_path, alert: @branch_office.get_error()
+            redirect_to new_branch_office_path, alert: @branch_office.errors.full_messages.first
         else 
             redirect_to @branch_office , notice: "Sucursal creada exitosamente"
         end
@@ -33,22 +33,26 @@ class BranchOfficesController < ApplicationController
 
     #PATCH /branch_offices/:id
     def update
-        if BranchOffice.where(name: params[:branch_office][:name]).any?
-            redirect_to edit_branch_office_path, alert: "El nombre ingresado ya se encuentra en el sistema"
-        else
-            @branch_office.update(branch_office_params)
-            redirect_to @branch_office , notice: "Sucursal actualizada exitosamente"
+        @branch_office.update(branch_office_params)
+
+        if @branch_office.invalid?
+            return redirect_to edit_branch_office_path, alert: @branch_office.errors.full_messages.first
         end
+
+        redirect_to @branch_office, notice: "Sucursal actualizada exitosamente"
     end
 
     #DELETE /branch_offices/:id
     def destroy
-        unless @branch_office.working_days.empty?
-            redirect_to @branch_office, alert: "No se puede eliminar sucursales con dias laborales"
-        else 
+
+        message = evaluate_delete_condition()
+
+        if message
+            redirect_to @branch_office, alert: message
+        else
             @branch_office.destroy
             redirect_to branch_offices_path, notice: "Sucursal eliminada satisfactoriamente"
-        end 
+        end
     end
 
     #GET /branch_offices/:id/appointments
@@ -64,7 +68,21 @@ class BranchOfficesController < ApplicationController
         params.require(:branch_office).permit(:name,:direction,:phone,:location_id)
       end
 
-      def validate_params()
-        #valida que los datos ingresados sean validos
+      def evaluate_delete_condition
+        message = ""
+
+        unless @branch_office.working_days.empty?
+            return "No se puede eliminar sucursales con dias laborales"
+        end
+    
+        unless Appointment.get_by_branch_office(@branch_office).empty?
+            return "No se puede eliminar sucursal por que cuenta con turnos pendientes"
+        end
+
+        unless User.get_user_by_branch_office(branchoffice).empty?
+            return "No se puede eliminar sucursal por que se encuentran personales bancarios asignados"
+        end
+
+        message
       end
 end

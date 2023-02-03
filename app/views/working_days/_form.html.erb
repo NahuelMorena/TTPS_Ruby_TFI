@@ -8,8 +8,8 @@
     </div>
     <div class="field">
         <%= form.label :attention_time_id, "Franja Horaria" %>
-        <%= form.collection_select :attention_time_id, AttentionTime.all, :id, :get_by_format, prompt: true%>
-        <%= link_to "Agregar nueva franja horaria", new_attention_time_url %>    
+        <%= form.collection_select :attention_time_id, AttentionTime.all, :id, :get_by_format %>
+        <%= link_to "Agregar nueva franja horaria", new_attention_time_url, class: "padding" %>    
     </div>
     <div class="field">
         <% unless @working_day.id %>
@@ -21,8 +21,11 @@
             <%= form.select :branch_office_id, branch_office %>
         <% end %>
     </div>
-    <div class="field">
-        <%= form.submit %>
+
+    <div class="padding">
+      <div class="row">
+        <%= form.submit class:"btn btn-primary"%>
+      </div>
     </div>
   <%end%>
 </div>

@@ -1,5 +1,4 @@
 class WorkingDaysController < ApplicationController
-    before_action :authenticate_user!
     load_and_authorize_resource
     before_action :find_working_day, except: %i[new create index]
 
@@ -14,13 +13,14 @@ class WorkingDaysController < ApplicationController
     end
 
     #POST /working_days
-    def create 
-        if WorkingDay.where(day: params[:working_day][:day], branch_office_id: params[:working_day][:branch_office_id]).any?
-            redirect_to new_working_day_path, alert: "El dia de trabajo para esta sucursal ya existe en el sistema"
-        else 
-            @working_day = WorkingDay.create(working_day_params)
-            redirect_to working_days_path, notice: "El dia laboral se a registado correctamente"
+    def create
+        @working_day = WorkingDay.create(working_day_params)
+        
+        if @working_day.invalid?
+            return redirect_to new_working_day_path, alert: @working_day.errors.full_messages.first
         end
+        
+        redirect_to working_days_path, notice: "El dia laboral se a registado correctamente"
     end
 
     #GET /working_days/:id
@@ -33,13 +33,13 @@ class WorkingDaysController < ApplicationController
 
     #PATCH /working_days/:id
     def update
-        id = WorkingDay.where(day: params[:working_day][:day], branch_office_id: params[:working_day][:branch_office_id]).first.id
-        if @working_day.id != id
-            redirect_to edit_working_day_path, alert: "El dia de trabajo para esta sucursal ya existe en el sistema"
-        else 
-            @working_day.update(working_day_params)
-            redirect_to working_days_path, notice: "El dia laboral se a registado correctamente"
+        @working_day.update(working_day_params)
+
+        if @working_day.invalid?
+            return redirect_to edit_working_day_path, alert: @working_day.errors.full_messages.first
         end
+        
+        redirect_to working_days_path, notice: "El dia laboral se a registado correctamente"
     end
 
     #DELETE /working_day/:id

@@ -2,15 +2,18 @@
   <%= form_with(model: @attention_time, local: true) do |form| %>
 
     <div class="field">
-      <%= form.label :hour_start, "Hora inicial" %>
+      <%= form.label :hour_start %>
       <%= form.time_field :hour_start %>
     </div>
     <div class="field">
-      <%= form.label :hour_end, "Hora final" %>
+      <%= form.label :hour_end %>
       <%= form.time_field :hour_end%>
     </div>
-    <div class="field">
-      <%= form.submit%>
+
+    <div class="padding">
+      <div class="row">
+        <%= form.submit class:"btn btn-primary"%>
+      </div>
     </div>
   <%end%>
 </div>

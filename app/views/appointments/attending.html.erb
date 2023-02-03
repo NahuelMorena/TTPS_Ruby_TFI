@@ -22,9 +22,13 @@
               <%= form.label :result, "Resultado del turno" ,style: "display: block" %>
               <%= form.text_field :result %>
             </div>
-            <div class="field">
-              <%= form.submit "Atender turno" %>
+
+            <div class="padding">
+              <div class="row">
+                <%= form.submit "Atender turno", class:"btn btn-primary"%>
+              </div>
             </div>
+            
           <% end %>
         </div>
       <% else %>
