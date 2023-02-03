@@ -1,6 +1,6 @@
 class Appointment < ApplicationRecord
+    validates :date, :hour, :reason, :user, :branch_office, :state, presence: true
     belongs_to :user
-    #belongs_to :personal, class_name: "User"
     belongs_to :branch_office
     belongs_to :state
     enum state: [:slope, :cancelled, :attended]

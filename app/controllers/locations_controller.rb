@@ -1,5 +1,4 @@
 class LocationsController < ApplicationController
-    before_action :authenticate_user!
     load_and_authorize_resource
     before_action :find_location, only: %i[ show edit update destroy ]
 

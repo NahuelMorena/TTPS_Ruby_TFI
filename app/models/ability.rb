@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     
-    can [:show, :edit, :update, :editPassword], User, User.all do |item|
+    can [:show, :edit, :update, :editPassword, :updatePassword], User, User.all do |item|
       item == user
     end
 

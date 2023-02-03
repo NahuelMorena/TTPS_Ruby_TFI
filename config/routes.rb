@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get "admin/new", to: "users#new", on: :collection
     post "admin/create", to: "users#create", on: :collection
     get "editPassword", to: "users#editPassword", on: :member
+    patch "updatePassword", to: "users#updatePassword", on: :member
   end
 
   # Defines the root path route ("/")

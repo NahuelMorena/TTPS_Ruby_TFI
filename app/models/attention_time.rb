@@ -1,4 +1,5 @@
 class AttentionTime < ApplicationRecord
+    validates :hour_start, :hour_end, presence: true
     has_many :working_days
 
     # Class Methods

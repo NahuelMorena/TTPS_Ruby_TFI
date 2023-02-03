@@ -1,5 +1,4 @@
 class WorkingDaysController < ApplicationController
-    before_action :authenticate_user!
     load_and_authorize_resource
     before_action :find_working_day, except: %i[new create index]
 
@@ -15,8 +14,8 @@ class WorkingDaysController < ApplicationController
     end
 
     #POST /working_days
-    def create 
-        if WorkingDay.where(day: params[:working_day][:day], branch_office_id: params[:working_day][:branch_office_id]).any?
+    def create
+        if WorkingDay.find_by_branch_office_id_and_day(params[:working_day][:branch_office_id],params[:working_day][:day]) 
             redirect_to new_working_day_path, alert: "El dia de trabajo para esta sucursal ya existe en el sistema"
         else 
             @working_day = WorkingDay.create(working_day_params)
@@ -35,8 +34,8 @@ class WorkingDaysController < ApplicationController
 
     #PATCH /working_days/:id
     def update
-        id = WorkingDay.where(day: params[:working_day][:day], branch_office_id: params[:working_day][:branch_office_id]).first.id
-        if @working_day.id != id
+        working_dayDB = WorkingDay.find_by_branch_office_id_and_day(params[:working_day][:branch_office_id], params[:working_day][:day])
+        if @working_day.id != working_dayDB.id
             redirect_to edit_working_day_path, alert: "El dia de trabajo para esta sucursal ya existe en el sistema"
         else 
             @working_day.update(working_day_params)

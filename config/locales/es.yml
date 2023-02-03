@@ -1,0 +1,40 @@
+es:
+  activerecord:
+    models:
+      user:
+        one: 'Usuario'
+        others: 'Usuarios'
+    attributes:
+      user:
+        email: 'Email'
+        name: 'Nombre'
+        password: 'Contraseña'
+        password_confirmation: 'Contraseña de confirmación'
+
+        surname: 'Apellido'
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: 'no puede ser nulo'
+              taken: 'ya se encuentra en uso'
+            name: 
+              blank: 'no puede ser nulo'
+            surname:
+              blank: 'no puede ser nulo'
+            password:
+              blank: 'no puede ser nulo'
+              too_short: 'ingresada debe poseer como minimo 6 caracteres'
+            password_confirmation:
+              confirmation: 'no coincide con la contraseña ingresada'
+            encrypted_password:
+              blank: 'no puede ser nulo'
+              too_short: 'Debe poseer como minimo 6 caracteres'  
+  helpers:
+    submit:
+      user:
+        create: "Guardar %{model}"
+        update: "Actualizar %{model}"
+
+    

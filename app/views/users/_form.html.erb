@@ -5,11 +5,11 @@
       <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
     <div class="field">
-      <%= form.label :name, "Nombre" %><br />
+      <%= form.label :name %><br />
       <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
     </div>
     <div class="field">
-      <%= form.label :surname, "Apellido" %><br />
+      <%= form.label :surname %><br />
       <%= form.text_field :surname, autofocus: true, autocomplete: "surname" %>
     </div>
 
@@ -41,7 +41,7 @@
     <% end %>
     <div class="padding">
       <div class="row">
-        <%= form.submit @button_text, class:"btn btn-primary"%>
+        <%= form.submit class:"btn btn-primary"%>
       </div>
     </div>
   <% end %>

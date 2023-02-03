@@ -1,9 +1,9 @@
 <div class="small-container center-block">
+  <%= render "devise/shared/error_messages", resource: resource %>
   <div class="row center padding"><h2>Registrarse</h2></div>
   <div class="card padding margin-top">
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
         <%= f.label :email %><br />

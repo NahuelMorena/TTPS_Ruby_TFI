@@ -1,5 +1,4 @@
 class BranchOfficesController < ApplicationController
-    before_action :authenticate_user!
     load_and_authorize_resource
     before_action :find_branch_office, except: %i[new create index appointments]
     

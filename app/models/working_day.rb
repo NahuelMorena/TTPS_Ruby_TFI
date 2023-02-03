@@ -1,7 +1,9 @@
 class WorkingDay < ApplicationRecord
+    validates :day, :branch_office, :attention_time, presence: true
+
     belongs_to :branch_office
     belongs_to :attention_time
-
+    
     @@days_names = { 
         "1" => "Lunes", 
         "2" => "Martes", 
