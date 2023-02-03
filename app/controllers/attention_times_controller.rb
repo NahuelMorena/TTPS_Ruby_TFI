@@ -14,10 +14,6 @@ class AttentionTimesController < ApplicationController
 
     #POST /attention_times
     def create 
-        if AttentionTime.find_by_hour_start_and_hour_end(params[:attention_time][:hour_start], params[:attention_time][:hour_end])
-            return redirect_to new_attention_time_path, alert: "La franja horaria ya existe en el sistema"
-        end
-
         @attention_time = AttentionTime.create(attention_time_params)
         
         if @attention_time.invalid?
@@ -36,11 +32,7 @@ class AttentionTimesController < ApplicationController
     end
     
     #PATCH /attention_times/:id
-    def update
-        if AttentionTime.find_by_hour_start_and_hour_end(params[:attention_time][:hour_start], params[:attention_time][:hour_end])
-            return redirect_to edit_attention_time_path, alert: "La franja horaria ya existe en el sistema"
-        end
-        
+    def update        
         @attention_time.update(attention_time_params)
             
         if @attention_time.invalid?
