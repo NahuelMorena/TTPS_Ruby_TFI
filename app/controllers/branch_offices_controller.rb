@@ -10,14 +10,14 @@ class BranchOfficesController < ApplicationController
     #GET /branch_offices/new
     def new
         @branch_office = BranchOffice.new
-        @button_text = "Crear sucursal"
     end
 
     #POST /branch_offices
     def create 
         @branch_office = BranchOffice.create(branch_office_params)
+
         if @branch_office.invalid?
-            redirect_to new_branch_office_path, alert: @branch_office.get_error()
+            redirect_to new_branch_office_path, alert: @branch_office.errors.full_messages.first
         else 
             redirect_to @branch_office , notice: "Sucursal creada exitosamente"
         end
@@ -29,17 +29,17 @@ class BranchOfficesController < ApplicationController
 
     #GET /branch_offices/:id/edit
     def edit
-        @button_text = "Actualizar sucursal"
     end
 
     #PATCH /branch_offices/:id
     def update
-        if BranchOffice.where(name: params[:branch_office][:name]).any?
-            redirect_to edit_branch_office_path, alert: "El nombre ingresado ya se encuentra en el sistema"
-        else
-            @branch_office.update(branch_office_params)
-            redirect_to @branch_office , notice: "Sucursal actualizada exitosamente"
+        @branch_office.update(branch_office_params)
+
+        if @branch_office.invalid?
+            return redirect_to edit_branch_office_path, alert: @branch_office.errors.full_messages.first
         end
+
+        redirect_to @branch_office, notice: "Sucursal actualizada exitosamente"
     end
 
     #DELETE /branch_offices/:id
@@ -84,9 +84,5 @@ class BranchOfficesController < ApplicationController
         end
 
         message
-      end
-
-      def validate_params
-        #valida que los datos ingresados sean validos
       end
 end

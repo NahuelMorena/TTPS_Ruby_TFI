@@ -2,18 +2,18 @@
   <%= form_with(model: @appointment, local: true) do |form| %>
 
     <div class="field">
-      <%= form.label :date, "Fecha", style: "display: block" %>
+      <%= form.label :date, style: "display: block" %>
       <%= form.date_field :date %>
     </div>
 
     <div class="field">
-      <%= form.label :hour, "Hora", style: "display: block" %>
+      <%= form.label :hour, style: "display: block" %>
       <%= form.time_field :hour %>
     </div>
 
      <div class="field">
       <%= form.label :branch_office_id, "Sucursal"%>
-      <%= form.collection_select :branch_office_id, BranchOffice.all, :id, :name, prompt: true%>   
+      <%= form.collection_select :branch_office_id, BranchOffice.all, :id, :name%>   
     </div>
 
     <% if @edit %>
@@ -31,7 +31,7 @@
 
     <div class="padding">
       <div class="row">
-        <%= form.submit @button_text, class:"btn btn-primary"%>
+        <%= form.submit class:"btn btn-primary"%>
       </div>
     </div>
   <%end%>

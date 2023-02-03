@@ -10,17 +10,21 @@ class AttentionTimesController < ApplicationController
     #GET /attention_times/new
     def new
         @attention_time = AttentionTime.new
-        @button_text = "Agregar franja horaria"
     end
 
     #POST /attention_times
     def create 
         if AttentionTime.find_by_hour_start_and_hour_end(params[:attention_time][:hour_start], params[:attention_time][:hour_end])
-            redirect_to new_attention_time_path, alert: "La franja horaria ya existe en el sistema"
-        else  
-            @attention_time = AttentionTime.create(attention_time_params)
-            redirect_to attention_times_path
+            return redirect_to new_attention_time_path, alert: "La franja horaria ya existe en el sistema"
         end
+
+        @attention_time = AttentionTime.create(attention_time_params)
+        
+        if @attention_time.invalid?
+            return redirect_to new_attention_time_path, alert: @attention_time.errors.full_messages.first
+        end
+        
+        redirect_to @attention_time
     end
 
     #GET /attention_times/:id
@@ -29,17 +33,21 @@ class AttentionTimesController < ApplicationController
 
     #GET /attention_times/:id/edit
     def edit
-        @button_text = "Actualizar franja horaria"
     end
     
     #PATCH /attention_times/:id
     def update
         if AttentionTime.find_by_hour_start_and_hour_end(params[:attention_time][:hour_start], params[:attention_time][:hour_end])
-            redirect_to edit_attention_time_path, alert: "La franja horaria ya existe en el sistema"
-        else  
-            @attention_time.update(attention_time_params)
-            redirect_to attention_times_path
+            return redirect_to edit_attention_time_path, alert: "La franja horaria ya existe en el sistema"
         end
+        
+        @attention_time.update(attention_time_params)
+            
+        if @attention_time.invalid?
+            return redirect_to edit_attention_time_path, alert: @attention_time.errors.full_messages.first
+        end
+        
+        redirect_to @attention_time
     end
     
     #DELETE /attention_times/:id

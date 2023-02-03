@@ -4,14 +4,57 @@ es:
       user:
         one: 'Usuario'
         others: 'Usuarios'
+      working_day:
+        one: 'Día de trabajo'
+        others: 'Días de trabajo'
+      province:
+        one: 'Provincia'
+        others: 'Provincias'
+      location:
+        one: 'Localidad'
+        others: 'Localidades'
+      branch_office: 
+        one: 'Sucursal'
+        others: 'Sucursales'
+      attention_time:
+        one: 'Hora de atención'
+        others: 'Horas de atención'
+      appointment:
+        one: 'Turno'
+        others: 'Turnos'
     attributes:
       user:
         email: 'Email'
         name: 'Nombre'
         password: 'Contraseña'
         password_confirmation: 'Contraseña de confirmación'
-
         surname: 'Apellido'
+      working_day:
+        day: 'Día'
+        branch_office: 'Sucursal'
+        attention_time: 'Franja horaria'
+      province:
+        name: 'Nombre'
+      location:
+        name: 'Nombre'
+        province: 'Provincia'
+      branch_office:
+        name: 'Nombre'
+        direction: 'Dirección'
+        phone: 'Telefono'
+        location: 'Localidad'
+      attention_time:
+        hour_start: 'Hora inicial'
+        hour_end: 'Hora final'
+      appointment:
+        date: 'Fecha'
+        hour: 'Hora'
+        reason: 'Razón'
+        result: 'Resultado'
+        user: 'Cliente'
+        branch_office: 'Sucursal'
+        personal: 'Personal'
+        state: 'Estado'
     errors:
       models:
         user:
@@ -31,10 +74,61 @@ es:
             encrypted_password:
               blank: 'no puede ser nulo'
               too_short: 'Debe poseer como minimo 6 caracteres'  
+        working_day:
+          attributes:
+            day:  
+              blank: 'no puede ser nulo'
+              taken: 'de trabajo para esta sucursal ya existe en el sistema'
+            branch_office: 
+              blank: 'no puede ser nulo'
+            attention_time: 
+              blank: 'no puede ser nulo'
+        province:
+          attributes:
+            name:
+              blank: 'no puede ser nulo'
+              taken: 'ya se encuentra en uso'
+        location:
+          attributes:
+            name:
+              blank: 'no puede ser nulo'
+              taken: 'de localidad combinado con la provincia ya se encuentra en el sistema'
+        branch_office:
+          attributes:
+            name:
+              blank: 'no puede ser nulo'
+              taken: 'ya se encuenta en uso'
+            direction: 
+              blank: 'no puede ser nulo'
+            phone: 
+              blank: 'no puede ser nulo'
+            location: 
+              blank: 'no puede ser nulo'
+        attention_time:
+          attributes:
+            hour_start:
+              blank: 'no puede ser nulo'
+            hour_end: 
+              blank: 'no puede ser nulo'
+        appointment:
+          attributes:
+            date: 
+              blank: 'no puede ser nulo'
+            hour: 
+              blank: 'no puede ser nulo'
+            reason: 
+              blank: 'no puede ser nulo'
+            result: 
+              blank: 'no puede ser nulo'
+            user: 
+              blank: 'no puede ser nulo'
+            branch_office: 
+              blank: 'no puede ser nulo'
+            personal: 
+              blank: 'no puede ser nulo'
+            state: 
+              blank: 'no puede ser nulo'
   helpers:
     submit:
-      user:
-        create: "Guardar %{model}"
-        update: "Actualizar %{model}"
-
-    
+      create: "Crear %{model}"
+      update: "Actualizar %{model}"    

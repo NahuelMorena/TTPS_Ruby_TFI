@@ -10,7 +10,6 @@ class ProvincesController < ApplicationController
     #GET /provinces/new
     def new
       @province = Province.new
-      @button_text = "Agregar provincia al sistema"
     end
 
     #POST /provinces 
@@ -29,17 +28,17 @@ class ProvincesController < ApplicationController
 
     #GET /provinces/:id/edit
     def edit
-      @button_text = "Actualizar provincia"
     end
 
     #PATCH /provinces/:id
     def update
-      if Province.where(name: params[:province][:name]).any?
-        redirect_to edit_province_path, alert: "El nombre ingresado ya se encuentra en el sistema"
-      else
-        @province.update(province_params)
-        redirect_to provinces_path , notice: "Provincia actualizada exitosamente"
+      @province.update(province_params)
+
+      if @province.invalid?
+        return redirect_to edit_province_path, alert: @province.errors.full_messages.first
       end
+
+      redirect_to provinces_path , notice: "Provincia actualizada exitosamente"
     end
 
     #DELETE /provinces/:id

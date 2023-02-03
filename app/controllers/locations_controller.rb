@@ -10,17 +10,17 @@ class LocationsController < ApplicationController
     #GET /locations/new
     def new
       @location = Location.new
-      @button_text = "Agregar localidad al sistema"
     end
 
     #POST /locations 
     def create
-      if Location.where(name: params[:location][:name], province_id: params[:location][:province_id]).any?
-        redirect_to new_location_path, alert: "La combinación de nombre de localidad y provincia ya se encuentra en el sistema"
-      else
-        @location = Location.create(location_params)
-        redirect_to @location, notice: "Localización creada exitosamente"
+      @location = Location.create(location_params)
+
+      if @location.invalid?
+        return redirect_to new_location_path, alert: @location.errors.full_messages.first
       end
+
+      redirect_to @location, notice: "Localización creada exitosamente"
     end
 
     #GET /locations/:id
@@ -29,17 +29,17 @@ class LocationsController < ApplicationController
 
     #GET /locations/:id/edit
     def edit
-      @button_text = "Actualizar localidad"
     end
     
     #PATCH /locations/:id
     def update
-      if Location.where(name: params[:location][:name], province_id: params[:location][:province_id]).any?
-        redirect_to edit_location_path, alert: "La combinación de nombre de localidad y provincia ya se encuentra en el sistema"
-      else
-        @location.update(location_params)
-        redirect_to locations_path , notice: "Localidad actualizada exitosamente"
+      @location.update(location_params)
+
+      if @location.invalid?
+        return redirect_to edit_location_path, alert: @location.errors.full_messages.first
       end
+
+      redirect_to locations_path , notice: "Localidad actualizada exitosamente"
     end
 
     #DELETE /locations/:id
