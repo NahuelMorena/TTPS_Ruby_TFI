@@ -1,6 +1,6 @@
 class BranchOffice < ApplicationRecord
-    validates :name, uniqueness: true
-    validates :name, :direction, :phone, presence: true
+    validates :name, presence: true, uniqueness: true
+    validates :direction, :phone, :location_id, presence: true
     has_many :working_days
     has_many :appointments
     belongs_to :location

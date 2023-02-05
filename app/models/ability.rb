@@ -22,12 +22,18 @@ class Ability
       else  
         puts "Soy personal"
 
-        can [:show, :appointments], BranchOffice, BranchOffice.all do |item|
+        can [:index, :show], BranchOffice
+        can [:appointments], BranchOffice, BranchOffice.all do |item|
           item.id == user.branch_office_id
         end
 
         can [:show, :attending, :register_attention], Appointment.all do |item|
           item.branch_office.id == user.branch_office_id
+        end
+
+        can [:index], User
+        can [:show], User, User.all do |item|
+          item.role_id == 3
         end
 
       end

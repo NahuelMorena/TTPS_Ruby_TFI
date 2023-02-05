@@ -29,4 +29,15 @@
       </div>
     </div>
   </div>
+
+  <% unless current_user.role_id == 2 && current_user == @user%>
+    <% if current_user.role_id == 2 || current_user == @user %>
+      <div class="row">
+        <h3 class="center margin-top">Turnos pendientes</h3>
+          <%= render Appointment.get_by_state_and_user(1,@user) %>
+        <h3 class="center margin-top">Turnos atendidos</h3>
+          <%= render Appointment.get_by_state_and_user(2,@user) %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

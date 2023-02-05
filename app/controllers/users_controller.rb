@@ -18,6 +18,11 @@ class UsersController < ApplicationController
 
   #POST /users
   def create
+    
+    if params[:user][:role_id] != "2"
+      params[:user][:branch_office_id] = nil
+    end
+
     @user = User.create(user_params)
 
     if @user.invalid?

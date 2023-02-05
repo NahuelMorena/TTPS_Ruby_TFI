@@ -1,6 +1,6 @@
 class Location < ApplicationRecord
     validates :name, presence: true, uniqueness: { scope: [:province_id]}
-    validates :province, presence: true
+    validates :province_id, presence: true
     has_many :branch_offices
     belongs_to :province
 

@@ -1,5 +1,5 @@
 class Appointment < ApplicationRecord
-    validates :date, :hour, :reason, :user, :branch_office, :state, presence: true
+    validates :date, :hour, :reason, :user_id, :branch_office_id, :state_id presence: true
     belongs_to :user
     belongs_to :branch_office
     belongs_to :state
@@ -13,6 +13,10 @@ class Appointment < ApplicationRecord
 
     def self.get_by_branch_office(branch_office)
         Appointment.where(branch_office_id: branch_office.id)
+    end
+
+    def self.get_by_state_and_user(state_id,user)
+        Appointment.where(state_id: state_id, user_id: user.id)
     end
 
     #Instance methods
