@@ -1,5 +1,6 @@
 class AttentionTime < ApplicationRecord
-    validates :hour_start, :hour_end, presence: true
+    validates :hour_start, presence: true, uniqueness: { scope: [:hour_end]}
+    validates :hour_end, presence: true
     has_many :working_days
 
     # Class Methods

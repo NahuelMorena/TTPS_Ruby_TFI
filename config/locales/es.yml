@@ -108,6 +108,7 @@ es:
           attributes:
             hour_start:
               blank: 'no puede ser nulo'
+              taken: 'y Hora final conforman una franja horaria ya existente en el sistema'
             hour_end: 
               blank: 'no puede ser nulo'
         appointment:
