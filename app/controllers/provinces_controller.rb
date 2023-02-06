@@ -43,13 +43,11 @@ class ProvincesController < ApplicationController
 
     #DELETE /provinces/:id
     def destroy
-      message = evaluate_delete_condition()
-      
-      if message 
-        redirect_to @province, alert: message
-      else
+      begin
         @province.destroy
         redirect_to provinces_path, notice: "Provincia eliminada satisfactoriamente"
+      rescue => exception
+        redirect_to @province, alert: "No se puede eliminar una provincia con localidades en el sistema"
       end
     end
 
@@ -60,14 +58,5 @@ class ProvincesController < ApplicationController
 
       def province_params
         params.require(:province).permit(:name)
-      end
-      
-      def evaluate_delete_condition
-        message = ""
-        unless @province.locations.empty?
-          return "No se puede eliminar una provincia con localidades en el sistema"
-        end
-
-        message
       end
 end

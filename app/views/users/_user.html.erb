@@ -7,7 +7,7 @@
       <% if user.role.name == "Personal bancario" %>
         <p class="card-text"><%= "Sucursal asignada: " + BranchOffice.find(user.branch_office_id).name %></p>
       <% end %>
-      <%= link_to "Ver más", user %>
+      <%= link_to "Ver más", user, class:"btn btn-primary" %>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ class WorkingDaysController < ApplicationController
 
     #GET  /working_days
     def index
-        @working_days = WorkingDay.all
+        @working_days = WorkingDay.all.order(:branch_office_id,:day)
     end
 
     #GET /working_days/new

@@ -30,8 +30,8 @@ class UsersController < ApplicationController
 
   #GET /users/:id
   def show
-    if current_user.role_id != 1
-      if current_user.role_id == 2
+    if @user.role_id != 1
+      if @user.role_id == 2
         @branch_office_name = BranchOffice.find(@user.branch_office_id).name 
       end
       @pending_appointment = Appointment.get_by_state_and_user(1,@user)
@@ -58,12 +58,16 @@ class UsersController < ApplicationController
   end
 
   #DELETE /users
-  def destroy
+  def destroy 
     if (@user == current_user)
       return redirect_to @user, alert: "No puedes eliminar tu propia cuenta"
-    else
+    end
+
+    begin
       @user.destroy
       redirect_to users_path, notice: "El usuario fue eliminado satisfactoriamente"
+    rescue => exception
+      return redirect_to @user, alert: "No puede eliminarse usuarios que hayan solicitado turnos en el sistema"
     end
   end
 

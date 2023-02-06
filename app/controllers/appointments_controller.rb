@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
   
     #GET /appointments 
     def index
-      @appointments = Appointment.all
+      @appointments = Appointment.all.order(:date, :hour)
     end
   
     #GET /appointments/new
@@ -49,6 +49,13 @@ class AppointmentsController < ApplicationController
   
     #DELETE /appointments/:id
     def destroy
+
+      begin
+        @appointment.destroy
+        redirect_to appointments_path, notice: "Se a borrado el turno correctamente"
+      rescue => exception
+        redirect_to @appointment, notice: "No se puede borrar el turno"
+      end
       @appointment.destroy
     end
 

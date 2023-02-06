@@ -43,14 +43,12 @@ class LocationsController < ApplicationController
     end
 
     #DELETE /locations/:id
-    def destroy
-      message = evaluate_delete_condition()
-
-      if message
-        redirect_to @location, alert: message
-      else
+    def destroy   
+      begin
         @location.destroy
         redirect_to locations_path, notice: "Localidad eliminada satisfactoriamente"
+      rescue => exception
+        redirect_to @location, alert: "No se puede eliminar una localidad con sucursales en el sistema"
       end
     end
 
@@ -61,15 +59,5 @@ class LocationsController < ApplicationController
 
       def location_params
         params.require(:location).permit(:name, :province_id)
-      end
-
-      def evaluate_delete_condition
-        message = ""
-
-        unless @location.branch_offices.empty?
-          return "No se puede eliminar una localidad con sucursales en el sistema"
-        end
-
-        message
       end
 end

@@ -44,13 +44,11 @@ class AttentionTimesController < ApplicationController
     
     #DELETE /attention_times/:id
     def destroy
-        message = evaluate_delete_condition()
-
-        if message
-            redirect_to @attention_time, alert: message
-        else
+        begin
             @attention_time.destroy
             redirect_to attention_times_path, notice: "La franja horaria fue eliminada satisfactoriamente"
+        rescue => exception
+            redirect_to @attention_time, alert: "No se puede eliminar franjas horarias que se encuentren en uso"
         end
     end
 
@@ -61,15 +59,5 @@ class AttentionTimesController < ApplicationController
 
       def attention_time_params
         params.require(:attention_time).permit(:hour_start,:hour_end)
-      end
-
-      def evaluate_delete_condition
-        message = ""
-
-        unless @attention_time.working_days.empty?
-            return "No se puede eliminar franjas horarias que se encuentren en uso"
-        end
-
-        message
       end
 end

@@ -23,7 +23,7 @@
       <% if @appointment.state.id == 2 %>
         <div class="row">
           <div class="col-6"><p class="card-text"> <%= "Turno atendido por: " + @appointment.get_personal.name%></p></div>
-          <div class="col-6"><p class="card-text"> <%= "Hora atendida: " + @appointment.updated_at.strftime("%H:%M")%></p></div>
+          <!--<div class="col-6"><p class="card-text"> <%= "Hora atendida: " + @appointment.updated_at.strftime("%H:%M")%></p></div> -->
         </div>
         <div class="row">
           <div class="col-12"><p class="card-text"> <%= "Resultado: " + @appointment.result%></p></div>
