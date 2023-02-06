@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :name, :surname, :role_id, presence: true
   validates :encrypted_password, presence: true, length: { minimum: 6 }
+  validates :branch_office_id, presence: true, if: Proc.new {|item| item.role_id == 2 } 
   
   belongs_to :role
   has_many :appointments

@@ -1,9 +1,40 @@
 class Appointment < ApplicationRecord
-    validates :date, :hour, :reason, :user_id, :branch_office_id, :state_id presence: true
+    validates :date, :hour, :reason, :user_id, :branch_office_id, :state_id, presence: true
+    validate :date_cannot_be_outside_of_working, :hour_cannot_be_outside_of_attention_time
     belongs_to :user
     belongs_to :branch_office
     belongs_to :state
     enum state: [:slope, :cancelled, :attended]
+
+    #validates
+
+    def blank_attribute?(date, branch_office_id, hour)
+        return date && branch_office_id && hour
+    end
+
+    def date_cannot_be_outside_of_working
+        if blank_attribute?(date, branch_office_id, hour)
+          number_day = WorkingDay.get_day_number(date)
+          working_day = WorkingDay.find_by_branch_office_id_and_day(branch_office_id, number_day)
+
+          unless working_day 
+            errors.add(:date, "seleccionada no se encuentra entre los días disponibles de atención de la sucursal.")
+          end
+        end
+    end
+
+    def hour_cannot_be_outside_of_attention_time
+        if blank_attribute?(date, branch_office_id, hour)
+          number_day = WorkingDay.get_day_number(date)
+          working_day = WorkingDay.find_by_branch_office_id_and_day(branch_office_id, number_day)
+
+          if working_day
+            unless working_day.attention_time.valid_time?(hour)
+                errors.add(:hour, "seleccionada no se encuentra entre la franja horaria de atención disponible")
+            end
+          end
+        end
+    end
 
     #Class methods
 

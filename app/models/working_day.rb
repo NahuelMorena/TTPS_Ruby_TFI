@@ -28,7 +28,7 @@ class WorkingDay < ApplicationRecord
     # Class methods
 
     def self.get_day_number(date)
-        date = date.split("-")
+        date = date.to_s.split("-")
         @@days_numbers[Time.new(date[0].to_i,date[1].to_i,date[2].to_i).ctime.split(" ").first]
     end
 

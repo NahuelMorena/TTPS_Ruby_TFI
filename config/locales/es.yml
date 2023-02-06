@@ -29,6 +29,7 @@ es:
         password: 'Contraseña'
         password_confirmation: 'Contraseña de confirmación'
         surname: 'Apellido'
+        branch_office_id: 'Sucursal'
       working_day:
         day: 'Día'
         branch_office: 'Sucursal'
@@ -74,6 +75,8 @@ es:
             encrypted_password:
               blank: 'no puede ser nulo'
               too_short: 'Debe poseer como minimo 6 caracteres'  
+            branch_office_id:
+              blank: 'debe asignase obligatoriamente al usuario Personal Bancario'
         working_day:
           attributes:
             day:  

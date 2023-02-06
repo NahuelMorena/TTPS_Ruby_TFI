@@ -18,11 +18,7 @@ class UsersController < ApplicationController
 
   #POST /users
   def create
-    
-    if params[:user][:role_id] != "2"
-      params[:user][:branch_office_id] = nil
-    end
-
+    ignore_branch_office_by_role()
     @user = User.create(user_params)
 
     if @user.invalid?
@@ -44,6 +40,7 @@ class UsersController < ApplicationController
 
   #PATCH /users/:id    
   def update
+    ignore_branch_office_by_role()
     @user.update(user_params)
 
     if @user.invalid?
@@ -88,4 +85,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:email.downcase, :name, :surname, :password, :password_confirmation, :role_id, :branch_office_id)
     end
 
+    def ignore_branch_office_by_role
+      if params[:user][:role_id] != "2"
+        params[:user][:branch_office_id] = nil
+      end
+    end
 end

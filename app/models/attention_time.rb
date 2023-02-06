@@ -11,6 +11,7 @@ class AttentionTime < ApplicationRecord
     end
 
     def valid_time?(hour)
+        hour = self.get_hour(hour)
         return (self.get_hour(hour_start) <= hour) & (self.get_hour(hour_end) >= hour)
     end
 

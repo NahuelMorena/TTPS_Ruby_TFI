@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
-    before_action :find_appointment, only: %i[ show edit update destroy attending register_attention]
+    load_and_authorize_resource
+    before_action :find_appointment, only: %i[ show edit update destroy attending register_attention cancel]
   
     #GET /appointments 
     def index
@@ -9,18 +10,16 @@ class AppointmentsController < ApplicationController
     #GET /appointments/new
     def new
       @appointment = Appointment.new
-      @button_text = "Crear turno"
     end
   
     #POST /appointments
     def create
-      
-      message = validate_params(params)
-      if message 
-        return redirect_to new_appointment_path, alert: message
+      @appointment = current_user.appointments.create(appointment_params)
+
+      if @appointment.invalid?
+        return redirect_to new_appointment_path, alert: @appointment.errors.full_messages.first
       end
 
-      @appointment = current_user.appointments.create(appointment_params)
       redirect_to @appointment, notice: "Se a registrado el turno correctamente"
     end
   
@@ -31,13 +30,21 @@ class AppointmentsController < ApplicationController
     #GET /appointments/:id/edit
     def edit
       @edit = true
-      @button_text = "Actualizar turno"
     end
   
     #PATCH /appointments/:id 
     def update
       @appointment.update(appointment_params)
-      redirect_to @appointment
+      
+      if @appointment.invalid?
+        return redirect_to edit_appointment_path(@appointment), alert: @appointment.errors.full_messages.first
+      end
+
+      if (params[:appointment][:state_id] == '3')
+        redirect_to root_path, notice: "Se a cancelado el turno correctamente"
+      else 
+        redirect_to @appointment, notice: "Se a actualizado el turno correctamente"
+      end 
     end
   
     #DELETE /appointments/:id
@@ -56,7 +63,7 @@ class AppointmentsController < ApplicationController
       @appointment.update(appointment_params)
       redirect_to @appointment
     end
-  
+
     private
       def find_appointment
         @appointment = Appointment.find(params[:id])
@@ -64,17 +71,5 @@ class AppointmentsController < ApplicationController
   
       def appointment_params
         params.require(:appointment).permit(:date, :hour, :reason, :branch_office_id, :result, :personal_id, :state_id)
-      end
-
-      def validate_params(params)
-        branch_office = BranchOffice.find(params[:appointment][:branch_office_id])
-        error = branch_office.valid_appointment(params[:appointment][:date], params[:appointment][:hour])  
-        if error
-          if error == 1
-            return "El dia seleccionado no se encuentra entre los disponibles de atención de la sucursal."
-          else
-            return "El horario seleccionado no se encuentra entre los disponibles de atención de la sucursal"
-          end
-        end
       end
 end
