@@ -30,6 +30,13 @@ class UsersController < ApplicationController
 
   #GET /users/:id
   def show
+    if current_user.role_id != 1
+      if current_user.role_id == 2
+        @branch_office_name = BranchOffice.find(@user.branch_office_id).name 
+      end
+      @pending_appointment = Appointment.get_by_state_and_user(1,@user)
+      @complete_appointment = Appointment.get_by_state_and_user(2,@user)
+    end
   end
 
   #GET /users/:id/edit

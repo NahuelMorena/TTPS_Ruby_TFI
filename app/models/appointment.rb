@@ -1,5 +1,6 @@
 class Appointment < ApplicationRecord
     validates :date, :hour, :reason, :user_id, :branch_office_id, :state_id, presence: true
+    validates :result, presence: true, if: Proc.new {|item| !item.personal_id.nil? } 
     validate :date_cannot_be_outside_of_working, :hour_cannot_be_outside_of_attention_time
     belongs_to :user
     belongs_to :branch_office

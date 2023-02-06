@@ -61,6 +61,11 @@ class AppointmentsController < ApplicationController
       params[:appointment][:state_id] = 2
       params[:appointment][:personal_id] = current_user.id
       @appointment.update(appointment_params)
+
+      if @appointment.invalid?
+        return redirect_to attending_appointment_path(@appointment), alert: @appointment.errors.full_messages.first
+      end
+
       redirect_to @appointment
     end
 
