@@ -47,13 +47,13 @@ $   rails db:reset
 En el archivo `db/seeds.rb` se encuentran los siguientes usuarios que se podran utilizar si se han cargado en la aplicación como se explico anteriormente.
 
 ```bash
-$   User.create(email: 'admin@gmail.com', name: 'Juan', surname: 'Hernandez', password: 'administrador', password_confirmation: 'administrador', role_id: admin.id)
-User.create(email: 'personal@gmail.com', name: 'Sofia', surname: 'Cruz', password: 'personal', password_confirmation: 'personal' , role_id: personal.id, branch_office_id: branch_office.id)
-User.create(email: 'cliente@gmail.com', name: 'Jose', surname: 'Peralta', password: 'cliente', password_confirmation: 'cliente', role_id: client.id)
+$   User.create(email: 'admin@gmail.com', name: 'Juan', surname: 'Hernandez', password: 'administrador', password_confirmation: 'administrador', role_id: admin_role.id)
+User.create(email: 'personal@gmail.com', name: 'Sofia', surname: 'Cruz', password: 'personal', password_confirmation: 'personal' , role_id: personal_role.id, branch_office_id: branch_office_1.id)
+User.create(email: 'cliente@gmail.com', name: 'Jose', surname: 'Peralta', password: 'cliente', password_confirmation: 'cliente', role_id: client_role.id)
 ``` 
-El primer usuario cuyo rol es `Administrador`, puede iniciar sesión ingresando como email `admin@gmail.com` y contraseña `administrador`. La principal funcionalidad de su rol es la de administrar los diferentes modelos que utiliza la aplicación, en lo que abarca la creación, edición, eliminación de sucursales, localidades, franjas horarias, etc. y hasta la posibilidad de crear nuevos usuarios para el sistema.
+El primer usuario cuyo rol es `Administrador`, puede iniciar sesión ingresando como email `admin@gmail.com` y contraseña `administrador`. La principal funcionalidad de su rol es la de administrar los diferentes modelos que utiliza la aplicación, en lo que abarca la creación, edición, eliminación de sucursales, localidades, franjas horarias, etc. y hasta la posibilidad de crear nuevos usuarios asignando diferentes roles a emplear dentro del sistema.
 
-El segundo usuario cuyo rol es `Personal bancareo`, puede iniciar sesión ingresando como email `personal@gmail.com` y contraseña `personal`. La principal funcionalidad de su rol es la de atender los turnos que se encuentren `pendientes` en la sucursal en la que se encuentra relacionada.
+El segundo usuario cuyo rol es `Personal bancareo`, puede iniciar sesión ingresando como email `personal@gmail.com` y contraseña `personal`. La principal funcionalidad de su rol es la de atender los turnos que se encuentren `pendientes` en la sucursal en la que se encuentra relacionada. Ademas de poder visualisar la información de las demas sucursales y clientes que se encuentren en el sistema.
 
 El  tercer usuario cuyo rol es `Cliente`, puede iniciar sesión ingresando como email `cliente@gmail.com` y contraseña `cliente`. La principal funcionalidad de su rol es la de solicitar turnos en las distintas sucursales del sistema y visualizar su lista de turnos que se encuentren en estado `pendiente` o `atendido`.
 
@@ -164,6 +164,12 @@ Ademas de brindar diferentes vistas como la encargada de iniciar sesion o regist
 Se encarga de brindar las metodologias encargadas de brindar las autorizaciones a los distintos espacios del sistema en base al rol de cada usuario.
 
 En base a un modelo Ability.rb permite personalizar los permisos a los distintos usuarios por el rol que cuantan cada uno.
+
+### Gema I18m
+
+Es una gema incluida por defecto dentro del framework Rails, encargada de la traducción de la aplicación web mediante archivos .yml dentro del proyecto.
+
+Utilizada principalmente para la traducción de las validaciónes implementadas en los modelos y de los mensajes que aparecen en la aplicación brindados por la gema Devise.
 
 
 
