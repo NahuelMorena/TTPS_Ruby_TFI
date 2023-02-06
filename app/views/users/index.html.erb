@@ -1,19 +1,21 @@
 <div class="large-container center-block">
-    <h1>Administración de usuarios</h1>
-    <%= link_to "Agregar nuevo usuario", admin_new_users_path %>
-    <h2>Usuarios del sistema</h2>
-    <div class="container">
-        <div class="row">
-            <h2 class="left">Lista de Administradores</h2>
-            <%= render @admins %>
-        </div>
-        <div class="row">
-            <h2 class="left">Lista de Personales Bancarios</h2>
-            <%= render @personals%>
-        </div>
-        <div class="row">
-            <h2 class="left">Lista de Clientes</h2>
-            <%= render @clients%>
-        </div>
+  <h1>Administración de usuarios</h1>
+  <%= link_to "Agregar nuevo usuario", admin_new_users_path %>
+  <h2>Usuarios del sistema</h2>
+  <div class="container">
+    <% if current_user.role.name == "Administrador"%>
+      <div class="row">
+        <h2 class="left">Lista de Administradores</h2>
+        <%= render @admins %>
+      </div>
+      <div class="row">
+        <h2 class="left">Lista de Personales Bancarios</h2>
+        <%= render @personals %>
+      </div>
+    <% end %>
+    <div class="row">
+      <h2 class="left">Lista de Clientes</h2>
+      <%= render @clients %>
     </div>
+  </div>
 </div>

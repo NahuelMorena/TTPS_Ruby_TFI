@@ -7,11 +7,11 @@
       <p class="card-text"><%= "Hora solicitada: " + appointment.hour.strftime("%H:%M")%></p>
       <p class="card-text"><%= "Estado: " + appointment.state.name%></p>
       <% if current_user.role.id == 3%>
-        <%= link_to "Ver más", appointment%>
+        <%= link_to "Ver más", appointment, class:"btn btn-primary"%>
       <% elsif appointment.state_id == 1 %>
-        <%= link_to "Atender turno", attending_appointment_path(appointment)%>
+        <%= link_to "Atender turno", attending_appointment_path(appointment), class:"btn btn-primary"%>
       <% else %>
-        <%= link_to "Ver mas", attending_appointment_path(appointment)%>
+        <%= link_to "Ver mas", attending_appointment_path(appointment), class:"btn btn-primary"%>
       <% end %>
     </div>
   </div>

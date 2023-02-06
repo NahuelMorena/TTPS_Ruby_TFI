@@ -6,11 +6,9 @@
         <h1>Sucursales disponibles en el sistema</h1>
     <% end %>
     <h2>Sucursales del sistema</h2>
-    <% if can? :manage, BranchOffice %>
     <div class="container">
         <div class="row">
             <%= render @branch_offices %>
         </div>
     </div>
-    <% end %>
 </div>

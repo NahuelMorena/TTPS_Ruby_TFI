@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   #POST /users
   def create
+    ignore_branch_office_by_role()
     @user = User.create(user_params)
 
     if @user.invalid?
@@ -29,6 +30,13 @@ class UsersController < ApplicationController
 
   #GET /users/:id
   def show
+    if current_user.role_id != 1
+      if current_user.role_id == 2
+        @branch_office_name = BranchOffice.find(@user.branch_office_id).name 
+      end
+      @pending_appointment = Appointment.get_by_state_and_user(1,@user)
+      @complete_appointment = Appointment.get_by_state_and_user(2,@user)
+    end
   end
 
   #GET /users/:id/edit
@@ -39,6 +47,7 @@ class UsersController < ApplicationController
 
   #PATCH /users/:id    
   def update
+    ignore_branch_office_by_role()
     @user.update(user_params)
 
     if @user.invalid?
@@ -83,4 +92,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:email.downcase, :name, :surname, :password, :password_confirmation, :role_id, :branch_office_id)
     end
 
+    def ignore_branch_office_by_role
+      if params[:user][:role_id] != "2"
+        params[:user][:branch_office_id] = nil
+      end
+    end
 end

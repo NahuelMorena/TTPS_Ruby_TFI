@@ -1,6 +1,6 @@
 class WorkingDay < ApplicationRecord
     validates :day, presence: true, uniqueness: { scope: [:branch_office_id]}
-    validates :branch_office, :attention_time, presence: true
+    validates :branch_office_id, :attention_time_id, presence: true
 
     belongs_to :branch_office
     belongs_to :attention_time
@@ -28,7 +28,7 @@ class WorkingDay < ApplicationRecord
     # Class methods
 
     def self.get_day_number(date)
-        date = date.split("-")
+        date = date.to_s.split("-")
         @@days_numbers[Time.new(date[0].to_i,date[1].to_i,date[2].to_i).ctime.split(" ").first]
     end
 

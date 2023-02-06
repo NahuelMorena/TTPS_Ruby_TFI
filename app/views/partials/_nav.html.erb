@@ -7,9 +7,29 @@
           <li class="nav-item">
             <%= link_to "Sucursales", branch_offices_path, class:"nav-link"%>
           </li>
-          <li class="nav-item">
-            <%= link_to "Usuarios", users_path, class:"nav-link"%>
-          </li>
+          <% if current_user.role_id != 3 %>
+            <li class="nav-item">
+              <%= link_to "Usuarios", users_path, class:"nav-link"%>
+            </li>
+            <% if current_user.role_id == 2 %>
+              <li class="nav-item">
+                <%= link_to "Sucursal #{BranchOffice.find(@current_user.branch_office_id).name}", branch_office_path(BranchOffice.find(@current_user.branch_office_id)), class:"nav-link"%>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Días de trabajo", working_days_path, class:"nav-link"%>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Franjas horarias", attention_times_path, class:"nav-link"%>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Provincias", provinces_path, class:"nav-link"%>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Localidades", locations_path, class:"nav-link"%>
+              </li>
+            <% end %>
+          <% end %>
         <% end %>
       </ul>
       <div>

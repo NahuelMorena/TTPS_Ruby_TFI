@@ -48,7 +48,9 @@
             <th>Dia</th>
             <th>Sucursal</th>
             <th>Franja Horaria</th>
-            <th>Operaciones</th>
+            <% if current_user.role.name == 'Administrador' %>
+              <th>Operaciones</th>
+            <% end %>
           </tr>
         </thead>
       <tbody class="table-group-divider">
