@@ -52,7 +52,7 @@ class BranchOfficesController < ApplicationController
             @branch_office.destroy
             redirect_to branch_offices_path, notice: "Sucursal eliminada satisfactoriamente"
         rescue => exception
-            redirect_to @branch_office, alert: "No se puede borrar sucursales con dias de trabajo y turnos asignados en el sistema"
+            redirect_to @branch_office, alert: "No se puede borrar sucursales que cuenten con dias laborables y/o turnos asignados"
         end
     end
 

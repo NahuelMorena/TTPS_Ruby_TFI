@@ -9,8 +9,8 @@ class Ability
       item == user
     end
 
-    unless user.role.name == "Administrador"
-      if user.role.name == "Cliente"
+    unless user.role_id == 1
+      if user.role_id  == 3
         puts "soy Cliente"
 
         can [:index, :show], BranchOffice 
