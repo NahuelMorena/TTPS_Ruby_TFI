@@ -4,8 +4,7 @@ Desarrollo web perteneciente al Trabajo Final Integrador (TFI) de la cursada 202
 
 # Contexto del proyecto
 
-Un importante banco de la Argentina está buscando modernizar la forma en que gestiona los turnos para la atención presencial en sus sucursales y para eso te encomendaron un desarrollo. En la actualidad, cualquier cliente debe acercarse a la sucursal para solicitar un turno para atención y luego esperar a que se le llame. El banco quiere poder ofrecer un sistema de turnos online, para que cualquier persona pueda solicitar un turno para ser atendido en una sucursal sin necesidad de acercarse a ésta
-y tener que esperar a ser atendida. 
+Un importante banco de la Argentina está buscando modernizar la forma en que gestiona los turnos para la atención presencial en sus sucursales y para eso te encomendaron un desarrollo. En la actualidad, cualquier cliente debe acercarse a la sucursal para solicitar un turno para atención y luego esperar a que se le llame. El banco quiere poder ofrecer un sistema de turnos online, para que cualquier persona pueda solicitar un turno para ser atendido en una sucursal sin necesidad de acercarse a ésta y tener que esperar a ser atendida. 
 
 ## Requisitos técnicos
 
@@ -171,5 +170,10 @@ Es una gema incluida por defecto dentro del framework Rails, encargada de la tra
 
 Utilizada principalmente para la traducción de las validaciónes implementadas en los modelos y de los mensajes que aparecen en la aplicación brindados por la gema Devise.
 
+## Decisiones de diseño
 
+Los usuarios que posean el rol de `Personal Bancario` poseen una referencia hacia la `Branch_Office` a la que fueron asignados, por lo que a la hora de borras dicha sucursal, se evaluara entro otras cosas, que no se encuentren usuarios asignados.
 
+Los `Appointment` poseen en el sistema tres estados posibles, el primero es `Pendiente`, que poseera una vez sea creado en el sistema. Posteriormente este estado puede pasar a dos estados posibles siendo el primero `Atendido, que lo obtendra una vez que un usuario cuyo rol sea `Personal bancario` realize la actualización del turno. El otro estado posible es cuando manualmente el cliente propietario de ese turno decide seleccionar el estado `Cancelado`.
+
+Los `Appointment` que poseean el estado `Cancelado` no seran borrados del sistema, pero tampoco apareceran en las vistas de la aplicación.
