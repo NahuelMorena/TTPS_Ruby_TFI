@@ -174,6 +174,6 @@ Utilizada principalmente para la traducción de las validaciónes implementadas 
 
 Los usuarios que posean el rol de `Personal Bancario` poseen una referencia hacia la `Branch_Office` a la que fueron asignados, por lo que a la hora de borras dicha sucursal, se evaluara entro otras cosas, que no se encuentren usuarios asignados.
 
-Los `Appointment` poseen en el sistema tres estados posibles, el primero es `Pendiente`, que poseera una vez sea creado en el sistema. Posteriormente este estado puede pasar a dos estados posibles siendo el primero `Atendido, que lo obtendra una vez que un usuario cuyo rol sea `Personal bancario` realize la actualización del turno. El otro estado posible es cuando manualmente el cliente propietario de ese turno decide seleccionar el estado `Cancelado`.
+Los `Appointment` poseen en el sistema tres estados posibles, el primero es `Pendiente`, que poseera una vez sea creado en el sistema. Posteriormente este estado puede pasar a dos estados posibles siendo el primero `Atendido`, que lo obtendra una vez que un usuario cuyo rol sea `Personal bancario` realize la actualización del turno. El otro estado posible es cuando manualmente el cliente propietario de ese turno decide seleccionar el estado `Cancelado`.
 
 Los `Appointment` que poseean el estado `Cancelado` no seran borrados del sistema, pero tampoco apareceran en las vistas de la aplicación.
