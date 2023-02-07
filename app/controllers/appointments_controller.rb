@@ -1,10 +1,10 @@
 class AppointmentsController < ApplicationController
     load_and_authorize_resource
-    before_action :find_appointment, only: %i[ show edit update destroy attending register_attention cancel]
+    before_action :find_appointment, only: %i[ show edit update destroy attending register_attention]
   
     #GET /appointments 
     def index
-      @appointments = Appointment.all
+      @appointments = Appointment.all.order(:date, :hour)
     end
   
     #GET /appointments/new
@@ -50,6 +50,7 @@ class AppointmentsController < ApplicationController
     #DELETE /appointments/:id
     def destroy
       @appointment.destroy
+      redirect_to appointments_path, notice: "Se a borrado el turno correctamente"
     end
 
     #GET /appointments/:id/attending

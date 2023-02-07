@@ -1,6 +1,8 @@
 <div class="large-container center-block">
   <h1>Administración de usuarios</h1>
-  <%= link_to "Agregar nuevo usuario", admin_new_users_path %>
+  <% if current_user.role_id == 1 %>
+    <%= link_to "Agregar nuevo usuario", admin_new_users_path %>
+  <% end %>
   <h2>Usuarios del sistema</h2>
   <div class="container">
     <% if current_user.role.name == "Administrador"%>
